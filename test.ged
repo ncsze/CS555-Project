@@ -1,0 +1,184 @@
+0 NOTE Nicholas Szegheo
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE Finklestein Lineage
+1 DATE 17 FEB 2021
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Me
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Robbie /Finklestein/
+2 GIVN Robbie
+2 SURN Finklestein
+2 _MARNM Finklestein
+1 SEX M
+1 BIRT
+2 DATE 10 JAN 1995
+1 FAMS @F1@
+1 FAMC @F2@
+0 @I2@ INDI
+1 NAME Robert /Finklestein/
+2 GIVN Robert
+2 SURN Finklestein
+2 _MARNM Finklestein
+1 SEX M
+1 BIRT
+2 DATE 11 AUG 1968
+1 FAMS @F2@
+1 FAMS @F3@
+1 FAMC @F4@
+0 @I3@ INDI
+1 NAME Margaret /Flintstone/
+2 GIVN Margaret
+2 SURN Flintstone
+2 _MARNM Finklestein
+1 SEX F
+1 BIRT
+2 DATE 5 JUL 1970
+1 DEAT Y
+2 DATE 10 DEC 2008
+1 FAMS @F2@
+1 FAMC @F5@
+0 @I4@ INDI
+1 NAME Bellina /Rumpelstiltskin/
+2 GIVN Bellina
+2 SURN Rumpelstiltskin
+2 _MARNM Finklestein
+1 SEX F
+1 BIRT
+2 DATE 11 JUN 1980
+1 FAMS @F3@
+1 FAMC @F6@
+0 @I5@ INDI
+1 NAME Fred /Finklestein/
+2 GIVN Fred
+2 SURN Finklestein
+2 _MARNM Finklestein
+1 SEX M
+1 BIRT
+2 DATE 14 OCT 2009
+1 FAMC @F3@
+0 @I6@ INDI
+1 NAME Georgina /Finklestein/
+2 GIVN Georgina
+2 SURN Finklestein
+2 _MARNM Finklestein
+1 SEX F
+1 BIRT
+2 DATE 23 SEP 2014
+1 FAMC @F3@
+0 @I7@ INDI
+1 NAME Roy /Finklestein/
+2 GIVN Roy
+2 SURN Finklestein
+2 _MARNM Finklestein
+1 SEX M
+1 BIRT
+2 DATE 8 MAY 1949
+1 FAMS @F4@
+0 @I8@ INDI
+1 NAME Mary /Feinberg/
+2 GIVN Mary
+2 SURN Feinberg
+2 _MARNM Finklestein
+1 SEX F
+1 BIRT
+2 DATE 12 JUL 1948
+1 FAMS @F4@
+0 @I9@ INDI
+1 NAME Diane /Belluso/
+2 GIVN Diane
+2 SURN Belluso
+2 _MARNM Belluso
+1 SEX F
+1 BIRT
+2 DATE 10 OCT 1995
+1 FAMS @F1@
+0 @I10@ INDI
+1 NAME Frederick /Flintstone/
+2 GIVN Frederick
+2 SURN Flintstone
+2 _MARNM Flintstone
+1 SEX M
+1 BIRT
+2 DATE 4 FEB 1950
+1 FAMS @F5@
+0 @I11@ INDI
+1 NAME Mary-Anne /Maywood/
+2 GIVN Mary-Anne
+2 SURN Maywood
+2 _MARNM Flintstone
+1 SEX F
+1 BIRT
+2 DATE 3 FEB 1953
+1 FAMS @F5@
+0 @I12@ INDI
+1 NAME Nate /Howard/
+2 GIVN Nate
+2 SURN Howard
+2 _MARNM Rumpelstiltskin
+1 SEX M
+1 BIRT
+2 DATE 7 AUG 1955
+1 FAMS @F6@
+0 @I13@ INDI
+1 NAME Geraldine /Rumpelstiltskin/
+2 GIVN Geraldine
+2 SURN Rumpelstiltskin
+2 _MARNM Rumpelstiltskin
+1 SEX F
+1 BIRT
+2 DATE 3 APR 1950
+1 FAMS @F6@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I9@
+1 EVEN
+2 TYPE Relationship
+2 DATE 13 JUL 2017
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 MARR
+2 DATE 5 MAY 1990
+1 EVEN
+2 TYPE Ending
+1 _CURRENT N
+0 @F3@ FAM
+1 HUSB @I2@
+1 WIFE @I4@
+1 CHIL @I5@
+1 CHIL @I6@
+1 MARR
+2 DATE 15 JAN 2009
+1 _CURRENT Y
+0 @F4@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I2@
+1 MARR
+2 DATE 2 MAR 1967
+1 _CURRENT Y
+0 @F5@ FAM
+1 HUSB @I10@
+1 WIFE @I11@
+1 CHIL @I3@
+1 MARR
+2 DATE 14 FEB 1968
+1 _CURRENT Y
+0 @F6@ FAM
+1 HUSB @I12@
+1 WIFE @I13@
+1 CHIL @I4@
+1 MARR
+2 DATE 6 APR 1979
+1 _CURRENT Y
+0 TRLR
