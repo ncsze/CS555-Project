@@ -1,6 +1,8 @@
 # Author: Nicholas Szegheo 10440343
 import sys
-import classes
+
+from classes import *
+
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 
@@ -78,10 +80,34 @@ def readgedcom(gedfile):
                 printgedline(list_line[0],list_line[1],"")
         
 
+def printSortedIndividuals(individuals):
+    individuals.sort(key=lambda x: x.id)
+    for individual in individuals:
+        print("Individual ID: " + str(individual.id))
+        print("Individual Name: " + individual.name)
+        print("")
+
+def printSortedFamilies(families):
+    families.sort(key=lambda x: x.id)
+    for family in families:
+        print("Family ID: " + str(family.id))
+        print("Husband Name: " + family.husband.name)
+        print("Wife Name: " + family.wife.name)
+        print("")
+
 if __name__ == "__main__":
     try:
         filename = input("Specify GEDCOM file: ")
         readgedcom(open(filename))
+
+        #Testing for sorted individuals
+        individuals = []
+        individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
+        individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
+        individuals.append(individual2)
+        individuals.append(individual1)
+        printSortedIndividuals(individuals)
+
     except:
         for line in sys.exc_info():
             print(line)
