@@ -103,7 +103,7 @@ def readgedcom(gedfile):
                         i.d_date = stuff[2]
                     if list_line1[1] == "FAMC":
                         i.child = list_line1[2]
-                    if list_line1[2] == "INDI" || list_line1[2] == "FAM":
+                    if list_line1[2] == "INDI" or list_line1[2] == "FAM":
                         break
                     j+=1
                         
@@ -129,7 +129,7 @@ def readgedcom(gedfile):
                         line2 = gedfile[j+1]
                         stuff = line2.split(" ", 2)
                         f.marr_date = stuff[2]
-                    if list_line1[2] == "INDI" || list_line1[2] == "FAM":
+                    if list_line1[2] == "INDI" or list_line1[2] == "FAM":
                         break
                     j+=1
                     
