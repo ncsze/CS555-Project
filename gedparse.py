@@ -1,7 +1,9 @@
-# Author: Nicholas Szegheo 10440343
+ # Author: Nicholas Szegheo 10440343
 import sys
 from datetime import date
 from classes import *
+from prettytable import PrettyTable
+
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
@@ -63,7 +65,7 @@ def readgedcom(gedfile):
 
     #Assume properly formatted gedcom file.
     c = 0
-    while c < gedfile.length:
+    while c < len(gedfile):
         line = gedfile[c]
         print("-->",line.rstrip())
         list_line = line.split(" ", 2)
@@ -149,20 +151,37 @@ def readgedcom(gedfile):
         c+=1
         
 
-def printSortedIndividuals(individuals):
-    individuals.sort(key=lambda x: x.id)
-    for individual in individuals:
-        print("Individual ID: " + str(individual.id))
-        print("Individual Name: " + individual.name)
-        print("")
+# def printSortedIndividuals(individuals):
+#     individuals.sort(key=lambda x: x.id)
+#     for individual in individuals:
+#         print("Individual ID: " + str(individual.id))
+#         print("Individual Name: " + individual.name)
+#         print("")
 
-def printSortedFamilies(families):
-    families.sort(key=lambda x: x.id)
-    for family in families:
-        print("Family ID: " + str(family.id))
-        print("Husband Name: " + family.husband.name)
-        print("Wife Name: " + family.wife.name)
-        print("")
+# def printSortedFamilies(families):
+#     families.sort(key=lambda x: x.id)
+#     for family in families:
+#         print("Family ID: " + str(family.id))
+#         print("Husband Name: " + family.husband.name)
+#         print("Wife Name: " + family.wife.name)
+#         print("")
+
+def tableIndi(individuals):
+    table = PrettyTable()
+    tables.field_names = ["ID", "Name", "Gender", "Brithday", "Age", "Alive", 
+                          "Death", "Child", "Spouse"]
+    for i in individuals:
+        table.add([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child, i.spouse])
+    print(table)
+
+def tableFamily(families):
+    table = PrettyTable()
+    tables.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", 
+                          "Wife Name", "Children"]
+    for i in families:
+        table.add([i.f_id, i.mar_date, i.div_date, i.husband.i_id, i.husband.name, 
+                    i.wife.i_id, i.wife.name, i.children])
+    print(table)
 
 if __name__ == "__main__":
     try:
@@ -173,13 +192,16 @@ if __name__ == "__main__":
         content = [x.strip() for x in content]
         readgedcom(content)
 
-        #Testing for sorted individuals
-        individuals = []
-        individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
-        individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
-        individuals.append(individual2)
-        individuals.append(individual1)
-        printSortedIndividuals(individuals)
+        # #Testing for sorted individuals
+        # individuals = []
+        # individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
+        # individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
+        # individuals.append(individual2)
+        # individuals.append(individual1)
+        # printSortedIndividuals(individuals)
+        
+        tableIndi(indivi_objs)
+        tableFamily(fam_objs)
 
     except:
         for line in sys.exc_info():
