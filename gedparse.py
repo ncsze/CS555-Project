@@ -103,6 +103,8 @@ def readgedcom(gedfile):
                         i.d_date = stuff[2]
                     if list_line1[1] == "FAMC":
                         i.child = list_line1[2]
+                    if list_line1[1] == "FAMS":
+                        i.spouse = listline1[2] ## this only leads us to the family id. need to pull the spouse name from there
                     if list_line1[2] == "INDI" or list_line1[2] == "FAM":
                         break
                     j+=1
