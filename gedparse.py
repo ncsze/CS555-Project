@@ -10,9 +10,6 @@ TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DI
 
 ALT_TAGS = ["INDI","FAM"]
 
-indivi_objs = []
-fam_objs = []
-
 def calc_age(string):
     today = date.today()
     today = today.strftime("%d/%m/%Y")
@@ -54,7 +51,10 @@ def calc_age(string):
 def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
     showing various information, including if the tag is valid.'''
-    
+    indivi_objs = []
+    fam_objs = []
+
+
     def printgedline(lvl, tag, arg):
         '''Helper: Print in the doc-specified desired format of:
         "<-- <level>|<tag>|<valid?> : Y or N|<arguments>"
@@ -67,7 +67,8 @@ def readgedcom(gedfile, printflag):
     c = 0
     while c < len(gedfile):
         line = gedfile[c]
-        print("-->",line.rstrip())
+        if printflag:
+            print("-->",line.rstrip())
         list_line = line.split(" ", 2)
         list_line[-1] = list_line[-1].rstrip()
         
@@ -81,30 +82,30 @@ def readgedcom(gedfile, printflag):
                 i.id = list_line[1]
                 # loop through until we hit next INDI/FAM
                 j = c + 1
-                while j < gedfile.length():
-                    line1 = gedfile[j]
-                    list_line1 = line1.split(" ", 2)
-                    list_line1[-1] = list_line1[-1].rstrip()
-                    if list_line1[1] == "NAME":
-                        i.name = list_line1[2]
-                    if list_line1[1] == "SEX":
-                        i.gender = list_line1[2]
-                    if list_line1[1] == "BIRT": ## check next line to get bday
+                while j < len(gedfile):
+                    nextline = gedfile[j]
+                    next_list_line = nextline.split(" ", 2)
+                    next_list_line[-1] = next_list_line[-1].rstrip()
+                    if next_list_line[1] == "NAME":
+                        i.name = next_list_line[2]
+                    if next_list_line[1] == "SEX":
+                        i.gender = next_list_line[2]
+                    if next_list_line[1] == "BIRT": ## check next line to get bday
                         line2 = gedfile[j+1]
                         stuff = line2.split(" ", 2)
                         i.b_date = stuff[2]
                         
                         i.age = calc_age(stuff[2])
-                    if list_line1[1] == "DEAT":
+                    if next_list_line[1] == "DEAT":
                         i.alive = False
                         line2 = gedfile[j+1]
                         stuff = line2.split(" ", 2)
                         i.d_date = stuff[2]
-                    if list_line1[1] == "FAMC":
-                        i.child = list_line1[2]
-                    if list_line1[1] == "FAMS":
-                        i.spouse = list_line1[2] ## this only leads us to the family id. need to pull the spouse name from there
-                    if list_line1[2] == "INDI" or list_line1[2] == "FAM":
+                    if next_list_line[1] == "FAMC":
+                        i.child_id = next_list_line[2]
+                    if next_list_line[1] == "FAMS":
+                        i.spouse_id = next_list_line[2] ## this only leads us to the family id. need to pull the spouse name from there
+                    if (len(next_list_line) >= 3) and (next_list_line[2] == "INDI" or next_list_line[2] == "FAM"):
                         break
                     j+=1
                         
@@ -113,26 +114,30 @@ def readgedcom(gedfile, printflag):
                 f = Family()
                 f.id = list_line[1]
                 # loop through until we hit next INDI/FAM
-                j = c + 1
+                k = c + 1
                 list_chil = []
-                while j < gedfile.length():
-                    line1 = gedfile[j]
-                    list_line1 = line.split(" ", 2)
-                    list_line1[-1] = list_line1[-1].rstrip()
-                    if list_line1[1] == "HUSB":
-                        f.husband = list_line1[2]    
-                    if list_line1[1] == "WIFE":
-                        f.wife = list_line1[2]     
-                    if list_line1[1] == "CHIL":
-                        list_chil.append(list_line1[2])
+                while k < len(gedfile):
+                    nextline = gedfile[k]
+                    next_list_line = nextline.split(" ", 2)
+                    next_list_line[-1] = next_list_line[-1].rstrip()
+                    if next_list_line[1] == "HUSB":
+                        f.husband = next_list_line[2]    
+                    if next_list_line[1] == "WIFE":
+                        f.wife = next_list_line[2]     
+                    if next_list_line[1] == "CHIL":
+                        list_chil.append(next_list_line[2])
                         f.children = list_chil
-                    if list_line1[1] == "MARR": ## check next line to get marr day
-                        line2 = gedfile[j+1]
+                    if next_list_line[1] == "MARR": ## check next line to get marr day
+                        line2 = gedfile[k+1]
                         stuff = line2.split(" ", 2)
-                        f.marr_date = stuff[2]
-                    if list_line1[2] == "INDI" or list_line1[2] == "FAM":
+                        f.mar_date = stuff[2]
+                    if next_list_line[1] == "DIV": ## check next line to get marr day
+                        line2 = gedfile[k+1]
+                        stuff = line2.split(" ", 2)
+                        f.div_date = stuff[2]
+                    if (len(next_list_line) >= 3) and (next_list_line[2] == "INDI" or next_list_line[2] == "FAM"):
                         break
-                    j+=1
+                    k+=1
                     
                 fam_objs.append(f)
             if printflag:
@@ -146,6 +151,23 @@ def readgedcom(gedfile, printflag):
                 # Case of no args
                 printgedline(list_line[0],list_line[1],"")
         c+=1
+    # After while loop: Populate families with individuals
+
+    
+    for i in range(len(fam_objs)):
+        fam = fam_objs[i]
+        #Find husband
+        for indiv in indivi_objs:
+            # Check husband 
+            if indiv.id == fam.husband:
+                fam.husband = indiv
+            if indiv.id == fam.wife:
+                fam.wife = indiv
+    
+
+
+    return indivi_objs, fam_objs
+    
         
 
 # def printSortedIndividuals(individuals):
@@ -165,47 +187,40 @@ def readgedcom(gedfile, printflag):
 
 def tableIndi(individuals):
     table = PrettyTable()
-    tables.field_names = ["ID", "Name", "Gender", "Brithday", "Age", "Alive", 
+    table.field_names = ["ID", "Name", "Gender", "Brithday", "Age", "Alive", 
                           "Death", "Child", "Spouse"]
     for i in individuals:
-        table.add([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child.id, i.spouse.id])
+        table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
     print(table)
 
 def tableFamily(families):
     table = PrettyTable()
-    tables.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", 
+    table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", 
                           "Wife Name", "Children"]
-    for i in families:
-        table.add([i.f_id, i.mar_date, i.div_date, i.husband.i_id, i.husband.name, 
-                    i.wife.i_id, i.wife.name, i.children])
+    for f in families:
+        table.add_row([f.id, f.mar_date, f.div_date, f.husband.id, f.husband.name, 
+                    f.wife.id, f.wife.name, f.children])
     print(table)
 
 if __name__ == "__main__":
-    try:
-        filename = input("Specify GEDCOM file: ")
-        printfile = input("Print lines of file? (Y/N):")
-        printflag = False
-        if (printfile == "Y" or printfile == "y"):
-            printflag = True
 
-        content = []
-        with open(filename) as f: 
-            content = f.readlines()
-        content = [x.strip() for x in content]
-        readgedcom(content, printflag)
+    filename = input("Specify GEDCOM file: ")
+    printfile = input("Print lines of file? (Y/N):")
+    printflag = True if (printfile == "Y" or printfile == "y") else False
 
-        # #Testing for sorted individuals
-        # individuals = []
-        # individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
-        # individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
-        # individuals.append(individual2)
-        # individuals.append(individual1)
-        # printSortedIndividuals(individuals)
-        
-        tableIndi(indivi_objs)
-        tableFamily(fam_objs)
 
-    except:
-        for line in sys.exc_info():
-            print(line)
-    input("Press Enter to continue.")
+    content = []
+    with open(filename) as f: 
+        content = f.readlines()
+    content = [x.strip() for x in content]
+    indivi_objs, fam_objs = readgedcom(content, printflag)
+    # #Testing for sorted individuals
+    # individuals = []
+    # individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
+    # individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
+    # individuals.append(individual2)
+    # individuals.append(individual1)
+    # printSortedIndividuals(individuals)
+    
+    tableIndi(indivi_objs)
+    tableFamily(fam_objs)
