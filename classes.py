@@ -9,6 +9,17 @@ class Individual:
         self.d_date = d_date
         self.child = child
         self.spouse = spouse
+    
+    def __init__(self):
+        self.id = "NA"
+        self.name = "NA"
+        self.gender = "NA"
+        self.b_date = "NA"
+        self.age = 0
+        self.alive = True
+        self.d_date = "NA"
+        self.child = None # Should be Individual Object
+        self.spouse = None # Should be Individual Object
 
 
 
@@ -17,9 +28,20 @@ class Family:
         self.id = f_id
         self.mar_date = mar_date
         self.div_date = div_date
-        # Individual type
+        # Individual object type
         self.husband = husband
-        # Individual type
+        # Individual object type
         self.wife = wife
         # List of ID strings
         self.children = children
+
+    def __init__(self):
+        self.id = "NA"
+        self.mar_date = "NA"
+        self.div_date = "NA"
+        # Individual object type
+        self.husband = None
+        # Individual object type
+        self.wife = None
+        # List of ID strings
+        self.children = []

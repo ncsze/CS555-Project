@@ -51,7 +51,7 @@ def calc_age(string):
             age = age -1 
     return age
 
-def readgedcom(gedfile):
+def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
     showing various information, including if the tag is valid.'''
     
@@ -76,12 +76,9 @@ def readgedcom(gedfile):
             # If line has 3 details and the third part is in 
             
             if list_line[2] == "INDI":
+                
                 i = Individual()
                 i.id = list_line[1]
-                i.alive = True
-                i.d_date = "NA"
-                i.child = "NA"
-                i.spouse = "NA"
                 # loop through until we hit next INDI/FAM
                 j = c + 1
                 while j < gedfile.length():
@@ -138,9 +135,9 @@ def readgedcom(gedfile):
                     j+=1
                     
                 fam_objs.append(f)
-
-            printgedline(list_line[0],list_line[2],list_line[1])
-        else:
+            if printflag:
+                printgedline(list_line[0],list_line[2],list_line[1])
+        elif printflag:
             if len(list_line) > 2:
                 # Case of full line
                            
@@ -171,7 +168,7 @@ def tableIndi(individuals):
     tables.field_names = ["ID", "Name", "Gender", "Brithday", "Age", "Alive", 
                           "Death", "Child", "Spouse"]
     for i in individuals:
-        table.add([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child, i.spouse])
+        table.add([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child.id, i.spouse.id])
     print(table)
 
 def tableFamily(families):
@@ -186,11 +183,16 @@ def tableFamily(families):
 if __name__ == "__main__":
     try:
         filename = input("Specify GEDCOM file: ")
+        printfile = input("Print lines of file? (Y/N):")
+        printflag = False
+        if (printfile == "Y" or printfile == "y"):
+            printflag = True
+
         content = []
         with open(filename) as f: 
             content = f.readlines()
         content = [x.strip() for x in content]
-        readgedcom(content)
+        readgedcom(content, printflag)
 
         # #Testing for sorted individuals
         # individuals = []
