@@ -105,7 +105,7 @@ def readgedcom(gedfile):
                         i.child = list_line1[2]
                     if list_line1[2] == "INDI" || list_line1[2] == "FAM":
                         break
-                    j++
+                    j+=1
                         
                 indivi_objs.append(i)
             if list_line[2] == "FAM":
@@ -131,6 +131,7 @@ def readgedcom(gedfile):
                         f.marr_date = stuff[2]
                     if list_line1[2] == "INDI" || list_line1[2] == "FAM":
                         break
+                    j+=1
                     
                 fam_objs.append(f)
 
@@ -143,7 +144,7 @@ def readgedcom(gedfile):
             else:
                 # Case of no args
                 printgedline(list_line[0],list_line[1],"")
-        c++
+        c+=1
         
 
 def printSortedIndividuals(individuals):
