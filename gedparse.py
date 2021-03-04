@@ -76,25 +76,34 @@ def readgedcom(gedfile):
             if list_line[2] == "INDI":
                 i = Individual()
                 i.id = list_line[1]
+                i.alive = True
+                i.d_date = "NA"
+                i.child = "NA"
+                i.spouse = "NA"
                 # loop through until we hit next INDI/FAM
                 j = c + 1
                 while j < gedfile.length():
-                    line = gedfile[j]
-                    list_line = line.split(" ", 2)
-                    list_line[-1] = list_line[-1].rstrip()
-                    if list_line[1] == "NAME":
-                        i.name = list_line[2]
-                    if list_line[1] == "SEX":
-                        i.gender = list_line[2]
-                    if list_line[1] == "BIRT": ## check next line to get bday
-                        i.b_date = 
-                    if list_line[1] == "DEAT":
+                    line1 = gedfile[j]
+                    list_line1 = line1.split(" ", 2)
+                    list_line1[-1] = list_line1[-1].rstrip()
+                    if list_line1[1] == "NAME":
+                        i.name = list_line1[2]
+                    if list_line1[1] == "SEX":
+                        i.gender = list_line1[2]
+                    if list_line1[1] == "BIRT": ## check next line to get bday
+                        line2 = gedfile[j+1]
+                        stuff = line2.split(" ", 2)
+                        i.b_date = stuff[2]
+                        
+                        i.age = calc_age(stuff[2])
+                    if list_line1[1] == "DEAT":
                         i.alive = False
-                    if list_line[1] == "FAMC":
-                        i.child = list_line[2]
-                    if list_line[1] == "MARR": ## check next line to get marr day
-                        i. = 
-                    if list_line[2] == "INDI" || list_line[2] == "FAM":
+                        line2 = gedfile[j+1]
+                        stuff = line2.split(" ", 2)
+                        i.d_date = stuff[2]
+                    if list_line1[1] == "FAMC":
+                        i.child = list_line1[2]
+                    if list_line1[2] == "INDI" || list_line1[2] == "FAM":
                         break
                     j++
                         
@@ -104,17 +113,23 @@ def readgedcom(gedfile):
                 f.id = list_line[1]
                 # loop through until we hit next INDI/FAM
                 j = c + 1
+                list_chil = []
                 while j < gedfile.length():
-                    line = gedfile[j]
-                    list_line = line.split(" ", 2)
-                    list_line[-1] = list_line[-1].rstrip()
-                    if list_line[1] == "HUSB":
-                        f.husband = list_line[2]    
-                    if list_line[1] == "WIFE":
-                        f.wife = list_line[2]     
-                    if list_line[1] == "CHIL":
-                        f.children = list_line[2]
-                    if list_line[2] == "INDI" || list_line[2] == "FAM":
+                    line1 = gedfile[j]
+                    list_line1 = line.split(" ", 2)
+                    list_line1[-1] = list_line1[-1].rstrip()
+                    if list_line1[1] == "HUSB":
+                        f.husband = list_line1[2]    
+                    if list_line1[1] == "WIFE":
+                        f.wife = list_line1[2]     
+                    if list_line1[1] == "CHIL":
+                        list_chil.append(list_line1[2])
+                        f.children = list_chil
+                    if list_line1[1] == "MARR": ## check next line to get marr day
+                        line2 = gedfile[j+1]
+                        stuff = line2.split(" ", 2)
+                        f.marr_date = stuff[2]
+                    if list_line1[2] == "INDI" || list_line1[2] == "FAM":
                         break
                     
                 fam_objs.append(f)
