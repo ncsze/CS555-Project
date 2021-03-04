@@ -206,9 +206,8 @@ if __name__ == "__main__":
 
     filename = input("Specify GEDCOM file: ")
     printfile = input("Print lines of file? (Y/N):")
-    printflag = False
-    if (printfile == "Y" or printfile == "y"):
-        printflag = True
+    printflag = True if (printfile == "Y" or printfile == "y") else False
+
 
     content = []
     with open(filename) as f: 
