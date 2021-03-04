@@ -192,7 +192,7 @@ if __name__ == "__main__":
         with open(filename) as f: 
             content = f.readlines()
         content = [x.strip() for x in content]
-        readgedcom(content)
+        readgedcom(content, printflag)
 
         # #Testing for sorted individuals
         # individuals = []
