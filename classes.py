@@ -7,8 +7,8 @@ class Individual:
         self.age = age
         self.alive = alive
         self.d_date = d_date
-        self.child = child
-        self.spouse = spouse
+        self.child_id = child
+        self.spouse_id = spouse
     
     def __init__(self):
         self.id = "NA"
@@ -18,8 +18,8 @@ class Individual:
         self.age = 0
         self.alive = True
         self.d_date = "NA"
-        self.child = None # Should be Individual Object
-        self.spouse = None # Should be Individual Object
+        self.child_id = "NA" # Should be a Family ID
+        self.spouse_id = "NA" # Should be a Family ID
 
 
 
