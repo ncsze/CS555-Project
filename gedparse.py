@@ -169,24 +169,6 @@ def userstory42_indivi(indiv_objs):
     
     return any_errors
 
-def userstory42_fam(fam_objs):
-    any_errors = False
-    for f in fam_objs:
-        mday = ""
-        diday = ""
-        if f.mar_date != "NA":
-            mday = date_converter(f.mar_date)
-            if date_check(mday) == True:
-                any_errors = True
-                print("Invalid marriage date", mday)
-
-
-        if f.div_date != "NA":
-            diday = date_converter(f.div_date)
-            if date_check(diday) == True:
-                any_errors = True
-                print("Invalid divorce date", diday)
-    return any_errors
 
 def userstory10(fam_objs, indivi_objs):
     anyerrors = False
@@ -261,7 +243,7 @@ def readgedcom(gedfile, printflag):
     showing various information, including if the tag is valid.'''
     indivi_objs = []
     fam_objs = []
-    
+
 
     def printgedline(lvl, tag, arg):
         '''Helper: Print in the doc-specified desired format of:
