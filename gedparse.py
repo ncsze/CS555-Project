@@ -127,6 +127,29 @@ def userstory1_fam(fam_objs):
 
     return any_errors
 
+def date_check(string):
+    error = False
+    if int(string[0]) < 0 or int(string[1]) < 0 or int(string[2]) < 0:
+        error = True
+
+    if int(string[1]) == 1 or int(string[1]) == 3 or int(string[1]) == 5 or int(string[1]) == 7 or int(string[1]) == 8 or int(string[1]) == 10 or int(string[1]) == 12:
+        if int(string[0]) > 31:
+            error = True
+
+    if int(string[1]) == 4 or int(string[1]) == 6 or int(string[1]) == 9 or int(string[1]) == 11:
+        if int(string[0]) > 30:
+            error = True
+            
+    if int(string[1]) == 2 and int(string[2]) % 4 == 0:
+        if int(string[0]) > 29:
+            error = True
+            
+    if int(string[1]) == 2 and int(string[2]) % 4 != 0:
+        if int(string[0]) > 28:
+            error = True
+
+    return error
+
 def userstory42_indivi(indiv_objs):
     any_errors = False
     for i in indiv_objs:
@@ -134,55 +157,16 @@ def userstory42_indivi(indiv_objs):
         dday = ""
         if i.b_date != "NA":
             bday = date_converter(i.b_date)
-            if int(bday[0]) < 0 or int(bday[1]) < 0 or int(bday[2]) < 0:
+            if date_check(bday) == True:
                 any_errors = True
                 print("Invalid birthday date", bday)
 
-            if int(bday[1]) == 1 or int(bday[1]) == 3 or int(bday[1]) == 5 or int(bday[1]) == 7 or int(bday[1]) == 8 or int(bday[1]) == 10 or int(bday[1]) == 12:
-                if int(bday[0]) > 31:
-                    any_errors = True
-                    print("Invalid birthday date", bday)
-
-            if int(bday[1]) == 4 or int(bday[1]) == 6 or int(bday[1]) == 9 or int(bday[1]) == 11:
-                if int(bday[0]) > 30:
-                    any_errors = True
-                    print("Invalid birthday date", bday)
-            
-            if int(bday[1]) == 2 and int(bday[2]) % 4 == 0:
-                if int(bday[0]) > 29:
-                    any_errors = True
-                    print("Invalid birthday date", bday)
-            
-            if int(bday[1]) == 2 and int(bday[2]) % 4 != 0:
-                if int(bday[0]) > 28:
-                    any_errors = True
-                    print("Invalid birthday date", bday)
-
-
         if i.d_date != "NA":
             dday = date_converter(i.d_date)
-            if int(dday[0]) < 0 or int(dday[1]) < 0 or int(dday[2]) < 0:
+            if date_check(dday) == True:
                 any_errors = True
                 print("Invalid death date", dday)
-            if int(dday[1]) == 1 or int(dday[1]) == 3 or int(dday[1]) == 5 or int(dday[1]) == 7 or int(dday[1]) == 8 or int(dday[1]) == 10 or int(dday[1]) == 12:
-                if int(dday[0]) > 31:
-                    any_errors = True
-                    print("Invalid death date", dday)
-
-            if int(dday[1]) == 4 or int(dday[1]) == 6 or int(dday[1]) == 9 or int(dday[1]) == 11:
-                if int(dday[0]) > 30:
-                    any_errors = True
-                    print("Invalid death date", dday)
-            
-            if int(dday[1]) == 2 and int(dday[2]) % 4 == 0:
-                if int(dday[0]) > 29:
-                    any_errors = True
-                    print("Invalid death date", dday)
-            
-            if int(dday[1]) == 2 and int(dday[2]) % 4 != 0:
-                if int(dday[0]) > 28:
-                    any_errors = True
-                    print("Invalid death date", dday)
+    
     return any_errors
 
 def userstory42_fam(fam_objs):
@@ -192,55 +176,16 @@ def userstory42_fam(fam_objs):
         diday = ""
         if f.mar_date != "NA":
             mday = date_converter(f.mar_date)
-            if int(mday[0]) < 0 or int(mday[1]) < 0 or int(mday[2]) < 0:
+            if date_check(mday) == True:
                 any_errors = True
                 print("Invalid marriage date", mday)
-
-            if int(mday[1]) == 1 or int(mday[1]) == 3 or int(mday[1]) == 5 or int(mday[1]) == 7 or int(mday[1]) == 8 or int(mday[1]) == 10 or int(mday[1]) == 12:
-                if int(mday[0]) > 31:
-                    any_errors = True
-                    print("Invalid marriage date", mday)
-
-            if int(mday[1]) == 4 or int(mday[1]) == 6 or int(mday[1]) == 9 or int(mday[1]) == 11:
-                if int(mday[0]) > 30:
-                    any_errors = True
-                    print("Invalid marriage date", mday)
-            
-            if int(mday[1]) == 2 and int(mday[2]) % 4 == 0:
-                if int(mday[0]) > 29:
-                    any_errors = True
-                    print("Invalid marriage date", mday)
-            
-            if int(mday[1]) == 2 and int(mday[2]) % 4 != 0:
-                if int(mday[0]) > 28:
-                    any_errors = True
-                    print("Invalid birthday date", mday)
 
 
         if f.div_date != "NA":
             diday = date_converter(f.div_date)
-            if int(diday[0]) < 0 or int(diday[1]) < 0 or int(diday[2]) < 0:
+            if date_check(diday) == True:
                 any_errors = True
                 print("Invalid divorce date", diday)
-            if int(diday[1]) == 1 or int(diday[1]) == 3 or int(diday[1]) == 5 or int(diday[1]) == 7 or int(diday[1]) == 8 or int(diday[1]) == 10 or int(diday[1]) == 12:
-                if int(diday[0]) > 31:
-                    any_errors = True
-                    print("Invalid divorce date", diday)
-
-            if int(diday[1]) == 4 or int(diday[1]) == 6 or int(diday[1]) == 9 or int(diday[1]) == 11:
-                if int(diday[0]) > 30:
-                    any_errors = True
-                    print("Invalid divorce date", diday)
-            
-            if int(diday[1]) == 2 and int(diday[2]) % 4 == 0:
-                if int(diday[0]) > 29:
-                    any_errors = True
-                    print("Invalid divorce date", diday)
-            
-            if int(diday[1]) == 2 and int(diday[2]) % 4 != 0:
-                if int(diday[0]) > 28:
-                    any_errors = True
-                    print("Invalid divorce date", diday)
     return any_errors
 
 def readgedcom(gedfile, printflag):
