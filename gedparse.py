@@ -129,7 +129,7 @@ def userstory1_fam(fam_objs):
 
 def date_check(string):
     error = False
-    if int(string[0]) < 0 or int(string[1]) < 0 or int(string[2]) < 0:
+    if int(string[0]) <= 0 or int(string[1]) <= 0 or int(string[2]) <= 0:
         error = True
 
     if int(string[1]) == 1 or int(string[1]) == 3 or int(string[1]) == 5 or int(string[1]) == 7 or int(string[1]) == 8 or int(string[1]) == 10 or int(string[1]) == 12:
@@ -370,4 +370,4 @@ if __name__ == "__main__":
     o42 = userstory42_indivi(indivi_objs)
     o42_1 = userstory42_fam(fam_objs)
 
-    # print(o1,o1_1,o42,o42_1)
+    #print(o1,o1_1,o42,o42_1)
