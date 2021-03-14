@@ -188,12 +188,35 @@ def userstory42_fam(fam_objs):
                 print("Invalid divorce date", diday)
     return any_errors
 
+def userstory10(fam_objs, indiv_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        for indiv in indiv_objs:
+            if(fam.husband.id == indiv.id or fam.wife.id == indiv.id):
+               married = date_converter(fam.mar_date) 
+               birthday = date_converter(indiv.b_date)
+               age = 0
+               age += int(married[2]) - int(birthday[2])
+               if int(married[1]) > birthday[1]:
+                   age = age - 1
+               if int(married[1]) == birthday[1]:
+                if int(married[0]) > int(birthday[0]):
+                    age = age -1 
+                    if age < 14:
+                        anyerrors = True
+                        print(indiv.name + " was married before 14")
+    return anyerrors
+
+def userstory11
+                
+    
+
 def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
     showing various information, including if the tag is valid.'''
     indivi_objs = []
     fam_objs = []
-
+    
 
     def printgedline(lvl, tag, arg):
         '''Helper: Print in the doc-specified desired format of:
