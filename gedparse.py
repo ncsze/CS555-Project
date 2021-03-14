@@ -1,4 +1,4 @@
- # Author: Nicholas Szegheo 10440343
+# Author: Nicholas Szegheo 10440343
 import sys
 from datetime import date
 from classes import *
@@ -231,7 +231,7 @@ def userstory11(fam_objs):
     anyerrors = False
     for fam in range(len(fam_objs)-1):
         for check in range(fam+1, len(fam_objs)):
-            if(fam_objs[fam].mar_date != "NA"):
+            if(fam_objs[fam].mar_date != "NA" and fam_objs[check].mar_date != "NA"):
                 
                 if(fam_objs[fam].husband.id == fam_objs[check].husband.id or fam_objs[fam].wife.id == fam_objs[check].wife.id):               
                     fam1Marriage = date_converter(fam_objs[fam].mar_date)
