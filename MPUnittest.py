@@ -21,10 +21,10 @@ class UserStoryTests(unittest.TestCase):
         fam_objs.append(f2)
         f = Family(1, "")
 
-    def userstory10(self):
+    def userstory10_1(self):
         self.assertEqual(userstory10(self.fam_objs, self.indivi_objs), True)
 
-    def userstory11(self):
+    def userstory10_2(self):
         self.assertEqual(userstory10(self.fam_objs), False)
         
 
