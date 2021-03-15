@@ -1,5 +1,5 @@
 class Individual:
-    def __init__(self,i_id, name, gender, b_date, age, alive, d_date, child, spouse):
+    def __init__(self, i_id = None, name = "NA", gender = "NA", b_date = "NA", age = 0, alive = True, d_date = "NA", child = "NA", spouse = "NA"):
         self.id = i_id
         self.name = name
         self.gender = gender
@@ -7,24 +7,11 @@ class Individual:
         self.age = age
         self.alive = alive
         self.d_date = d_date
-        self.child_id = child
-        self.spouse_id = spouse
-    
-    def __init__(self):
-        self.id = "NA"
-        self.name = "NA"
-        self.gender = "NA"
-        self.b_date = "NA"
-        self.age = 0
-        self.alive = True
-        self.d_date = "NA"
-        self.child_id = "NA" # Should be a Family ID
-        self.spouse_id = "NA" # Should be a Family ID
-
-
+        self.child_id = child # Should be a Family ID
+        self.spouse_id = spouse # Should be a Family ID
 
 class Family:
-    def __init__(self, f_id, mar_date,div_date, husband, wife, children):
+    def __init__(self, f_id = None, mar_date = "NA", div_date = "NA", husband = None, wife = None, children = []):
         self.id = f_id
         self.mar_date = mar_date
         self.div_date = div_date
@@ -34,14 +21,3 @@ class Family:
         self.wife = wife
         # List of ID strings
         self.children = children
-
-    def __init__(self):
-        self.id = "NA"
-        self.mar_date = "NA"
-        self.div_date = "NA"
-        # Individual object type
-        self.husband = None
-        # Individual object type
-        self.wife = None
-        # List of ID strings
-        self.children = []
