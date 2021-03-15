@@ -8,13 +8,13 @@ class UserStoryTests(unittest.TestCase):
     def setUp(self):
         self.indivi_objs = []
         self.fam_objs = []
-        i = Individual("@I1@", "Random /Name/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        i = Individual(1, "Random /Name/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i)
-        i2 = Individual("@I2@", "Random /Name/", "F", "31 FEB 1990", 31, True, "NA", "NA", "NA")
+        i2 = Individual(2, "Random /Name/", "F", "31 FEB 1990", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
-        i3 = Individual("@I3@", "Random /Name/", "F", "2 FEB 1980", 31, False, "32 JAN 1990", "NA", "NA")
+        i3 = Individual(3, "Random /Name/", "F", "2 FEB 1980", 31, False, "32 JAN 1990", "NA", "NA")
         indivi_objs.append(i3)
-        f = Family("@F1@", "32 JAN 1990", "14 MAR 2022", None, None, [])
+        f = Family(1, "32 JAN 1990", "14 MAR 2022", None, None, [])
         fam_objs.append(f)
     
     def test_User_Story_1I(self):
