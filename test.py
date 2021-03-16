@@ -28,7 +28,54 @@ class UserStoryTests(unittest.TestCase):
 
     def test_User_Story_42F(self):
         self.assertEqual(userstory42_indivi(self.fam_objs), True)
-        
+
+
+class EYUserStoryTests(unittest.TestCase):
+    def test_User_Story_21(self):
+        indivi_objs = []
+        fam_objs = []
+
+        i1 = Individual(1, "John", "M", "NA", 20, True, "NA", "NA", "F1")
+        indivi_objs.append(i1)
+        i2 = Individual(2, "Emily", "F", "NA", 20, True, "NA", "NA", "F1")
+        indivi_objs.append(i2)
+        f1 = Family(1, "NA", "NA", i1, i2, [])
+        fam_objs.append(f1)
+
+        self.assertFalse(userstory21(fam_objs))
+
+        i3 = Individual(3, "Walter", "F", "NA", 20, True, "NA", "NA", "F2")
+        indivi_objs.append(i3)
+        i4 = Individual(4, "Julia", "M", "NA", 20, True, "NA", "NA", "F2")
+        indivi_objs.append(i4)
+        f2 = Family(2, "NA", "NA", i3, i4, [])
+        fam_objs.append(f2)
+
+        self.assertTrue(userstory21(fam_objs))
+    
+    def test_User_Story_22(self):
+        indivi_objs = []
+        fam_objs = []
+
+        i1 = Individual(1, "John", "M", "NA", 20, True, "NA", "NA", "F1")
+        indivi_objs.append(i1)
+        i2 = Individual(2, "Emily", "F", "NA", 20, True, "NA", "NA", "F1")
+        indivi_objs.append(i2)
+        f1 = Family(1, "NA", "NA", i1, i2, [])
+        f2 = Family(f_id=2)
+        fam_objs.append(f1)
+        fam_objs.append(f2)
+
+        self.assertFalse(userstory22_indivi(indivi_objs))
+        self.assertFalse(userstory22_fam(fam_objs))
+
+        i3 = Individual(i_id=2)
+        indivi_objs.append(i3)
+        f3 = Family(f_id=2)
+        fam_objs.append(f3)
+
+        self.assertTrue(userstory22_indivi(indivi_objs))
+        self.assertTrue(userstory22_fam(fam_objs))
 
 
 if __name__ == "__main__":
