@@ -227,7 +227,8 @@ def main():
     #print(us10, us11)
     #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
     us29_print(indivi_objs)
-    us36_print(indivi_objs + [recent_death])
+    #us36_print(indivi_objs + [recent_death])
+    us36_print(indivi_objs)
     
     
 
