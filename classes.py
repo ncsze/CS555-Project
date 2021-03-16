@@ -1,3 +1,4 @@
+
 class Individual:
     def __init__(self, i_id = None, name = "NA", gender = "NA", b_date = "NA", age = 0, alive = True, d_date = "NA", child = "NA", spouse = "NA"):
         self.id = i_id
