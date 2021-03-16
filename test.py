@@ -89,6 +89,95 @@ class EYUserStoryTests(unittest.TestCase):
         self.assertTrue(userstory22_indivi(indivi_objs))
         self.assertTrue(userstory22_fam(fam_objs))
 
+class MPUserStoryTests(unittest.TestCase):
+    
+    def test_User_Story_10(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "Jenny Smith", "F", "31 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory10(fam_objs, indivi_objs), True)
+        
+        indivi_objs = []
+        fam_objs = []
+        i3 = Individual(3, "Frank Ham", "M", "2 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        i4 = Individual(4, "Samantha Ham", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i4)
+        
+        f2 = Family(2, "3 FEB 1994", "31 JAN 1993", i3, i4, [])
+        fam_objs.append(f2)
+        
+        self.assertEqual(userstory10(fam_objs, indivi_objs), False)
+    
+    def test_User_Story_11(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "Jenny Smith", "F", "31 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [])
+        fam_objs.append(f1)
+        
+        i3 = Individual(3, "Judy Smith", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        f2 = Family(2, "31 JAN 2005", "NA", i, i3, [])
+        fam_objs.append(f2)
+        
+        self.assertEqual(userstory11(fam_objs), True)
+        
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(4, "John Smith", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(5, "Jenny Smith", "F", "31 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        f1 = Family(3, "31 JAN 2000", "31 FEB 2005", i, i2, [])
+        fam_objs.append(f1)
+        
+        i3 = Individual(6, "Judy Smith", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        f2 = Family(4, "31 JAN 2005", "NA", i, i3, [])
+        fam_objs.append(f2)
+        #tableFamily(fam_objs)
+        self.assertEqual(userstory11(fam_objs), True)
+        
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(7, "John Smith", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(8, "Jenny Smith", "F", "31 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        f1 = Family(5, "31 JAN 2000", "29 JAN 2005", i, i2, [])
+        fam_objs.append(f1)
+        
+        i3 = Individual(9, "Judy Smith", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        f2 = Family(6, "30 JAN 2005", "NA", i, i3, [])
+        fam_objs.append(f2)
+        # tableFamily(fam_objs)
+        self.assertEqual(userstory11(fam_objs), False)
+        
+
+
 
 if __name__ == "__main__":
     unittest.main()

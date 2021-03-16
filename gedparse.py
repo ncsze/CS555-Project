@@ -51,7 +51,7 @@ def calc_age(string):
     if int(d[1]) < string[1]:
         age = age - 1
     if int(d[1]) == string[1]:
-        if int(d[0]) > int(string[0]):
+        if int(d[0]) < int(string[0]):
             age = age -1 
     return age
     
