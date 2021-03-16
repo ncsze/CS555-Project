@@ -47,10 +47,10 @@ def calc_age(string):
     string = date_converter(string)
     age = 0
     age += int(d[2]) - int(string[2])
-    if int(d[1]) > string[1]:
+    if int(d[1]) < string[1]:
         age = age - 1
     if int(d[1]) == string[1]:
-        if int(d[0]) > int(string[0]):
+        if int(d[0]) < int(string[0]):
             age = age -1 
     return age
     
