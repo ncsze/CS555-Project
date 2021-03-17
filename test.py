@@ -176,8 +176,53 @@ class MPUserStoryTests(unittest.TestCase):
         # tableFamily(fam_objs)
         self.assertEqual(userstory11(fam_objs), False)
         
+def date_to_gedstring(date_object):
+    '''Helper method for testing, lets you convert datetime objects like date.today() into GEDCOM-format strings'''
+    month = date_object.month
+    day = date_object.day
+    year = date_object.year
+
+    switcher = {
+        1: "JAN",
+        2: "FEB",
+        3: "MAR",
+        4: "APR",
+        5: "MAY",
+        6: "JUN",
+        7: "JUL",
+        8: "AUG",
+        9: "SEP",
+        10: "OCT",
+        11: "NOV",
+        12: "DEC"
+    }
+    month = switcher.get(month , "Invalid month")
+    return (str(day) +" "+ month +" "+ str(year))
 
 
+
+class NSUserStoryTests(unittest.TestCase):
+
+    def test_User_Story_29(self):
+        
+        individuals = []
+        liveman = Individual(1, "Alive Man", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        deadman = Individual(1, "Dead Man", "M", "10 JAN 1990", 31, False, "10 JAN 2015", "NA", "NA")
+        individuals.append(liveman)
+        individuals.append(deadman)
+        self.assertEqual(userstory29(individuals), [deadman])
+    
+    def test_User_Story_36(self):
+        
+        individuals = []
+        liveman = i = Individual(1, "Alive Man", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        deadman = Individual(1, "Dead Man", "M", "10 JAN 1990", 31, False, "10 JAN 2015", "NA", "NA")
+        recentlydeadman = Individual(1, "Recent Deadman", "M", "10 JAN 1990", 31, False, date_to_gedstring(date.today()), "NA", "NA")
+        individuals.append(liveman)
+        individuals.append(deadman)
+        individuals.append(recentlydeadman)
+        self.assertEqual(userstory36(individuals), [recentlydeadman])
+    
 
 if __name__ == "__main__":
     unittest.main()
