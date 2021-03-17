@@ -214,21 +214,26 @@ def main():
     tableIndi(indivi_objs)
     tableFamily(fam_objs)
 
-    o1 = userstory1_indivi(indivi_objs)
-    o1_1 = userstory1_fam(fam_objs)
-    o42 = userstory42_indivi(indivi_objs)
-    o42_1 = userstory42_fam(fam_objs)
-
-    #print(o1,o1_1,o42,o42_1)
+    #Jerry
+    us1_ind = userstory1_indivi(indivi_objs)
+    us1_fam = userstory1_fam(fam_objs)
+    us42_ind = userstory42_indivi(indivi_objs)
+    us42_fam = userstory42_fam(fam_objs)
     
+    #Mark
     us10 = userstory10(fam_objs, indivi_objs)
     us11 = userstory11(fam_objs)
     
-    #print(us10, us11)
-    #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
+    #Nick
     us29_print(indivi_objs)
+    #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
     #us36_print(indivi_objs + [recent_death])
     us36_print(indivi_objs)
+
+    #Edward
+    us21 = userstory21(fam_objs)
+    us22_ind = userstory22_indivi(indivi_objs)
+    us22_fam = userstory22_fam(fam_objs)
     
     
 
