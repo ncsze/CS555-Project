@@ -40,7 +40,7 @@ def userstory10(fam_objs, indivi_objs):
                        age = age - 1
                    if married[1] == birthday[1]:
                         if int(married[0]) < int(birthday[0]):
-                            age = age -1 
+                            age = age - 1 
                    if age < 14:
                        anyerrors = True
                        print("WARNING: " + indiv.name + " was married before 14")

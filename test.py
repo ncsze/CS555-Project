@@ -113,7 +113,7 @@ class MPUserStoryTests(unittest.TestCase):
         i4 = Individual(4, "Samantha Ham", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
-        f2 = Family(2, "3 FEB 1994", "31 JAN 1993", i3, i4, [])
+        f2 = Family(2, "1 MAR 1994", "31 JAN 1993", i3, i4, [])
         fam_objs.append(f2)
         
         self.assertEqual(userstory10(fam_objs, indivi_objs), False)
@@ -146,7 +146,7 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(5, "Jenny Smith", "F", "31 FEB 1980", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        f1 = Family(3, "31 JAN 2000", "31 FEB 2005", i, i2, [])
+        f1 = Family(3, "31 JAN 2000", "31 DEC 2005", i, i2, [])
         fam_objs.append(f1)
         
         i3 = Individual(6, "Judy Smith", "F", "2 FEB 1980", 31, True, "NA", "NA", "NA")
