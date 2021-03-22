@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 from EYFeatures import *
 from MPFeatures import *
 from JYFeatures import *
+from NSFeatures import *
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
@@ -57,7 +58,10 @@ def calc_age(string):
 
 def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
-    showing various information, including if the tag is valid.'''
+    showing various information, including if the tag is valid.
+    Returns (indivs, fams), indivs being a list of the individuals in the GEDCOM and fams 
+    being a list of the families in the file, each in the types laid out in classes.py.
+    '''
     indivi_objs = []
     fam_objs = []
     
@@ -178,6 +182,7 @@ def readgedcom(gedfile, printflag):
            
 
 def tableIndi(individuals):
+    '''Create a PrettyTable of the individuals and print it.'''
     individuals.sort(key=lambda x: x.id)
     table = PrettyTable()
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
@@ -186,6 +191,7 @@ def tableIndi(individuals):
     print(table)
 
 def tableFamily(families):
+    '''Create a PrettyTable of the families and print it.'''
     families.sort(key=lambda x: x.id)
     table = PrettyTable()
     table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
@@ -193,12 +199,11 @@ def tableFamily(families):
         table.add_row([f.id, f.mar_date, f.div_date, f.husband.id, f.husband.name, f.wife.id, f.wife.name, f.children])
     print(table)
 
-if __name__ == "__main__":
-
+def main():
+    '''Run and deliver all the features of the gedparse program.'''
     filename = input("Specify GEDCOM file: ")
     printfile = input("Print lines of file? (Y/N):")
     printflag = True if (printfile == "Y" or printfile == "y") else False
-
 
     content = []
     with open(filename) as f: 
@@ -209,14 +214,28 @@ if __name__ == "__main__":
     tableIndi(indivi_objs)
     tableFamily(fam_objs)
 
-    o1 = userstory1_indivi(indivi_objs)
-    o1_1 = userstory1_fam(fam_objs)
-    o42 = userstory42_indivi(indivi_objs)
-    o42_1 = userstory42_fam(fam_objs)
-
-    #print(o1,o1_1,o42,o42_1)
+    #Jerry
+    us1_ind = userstory1_indivi(indivi_objs)
+    us1_fam = userstory1_fam(fam_objs)
+    us42_ind = userstory42_indivi(indivi_objs)
+    us42_fam = userstory42_fam(fam_objs)
     
+    #Mark
     us10 = userstory10(fam_objs, indivi_objs)
     us11 = userstory11(fam_objs)
     
-    #print(us10, us11)
+    #Nick
+    us29_print(indivi_objs)
+    #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
+    #us36_print(indivi_objs + [recent_death])
+    us36_print(indivi_objs)
+
+    #Edward
+    us21 = userstory21(fam_objs)
+    us22_ind = userstory22_indivi(indivi_objs)
+    us22_fam = userstory22_fam(fam_objs)
+    
+    
+
+if __name__ == "__main__":
+    main() 
