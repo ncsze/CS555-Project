@@ -1,19 +1,19 @@
- # Author: Nicholas Szegheo 10440343
+# Author: Nicholas Szegheo 10440343
 import sys
 from datetime import date
 from classes import *
 from prettytable import PrettyTable
-
+from EYFeatures import *
+from MPFeatures import *
+from JYFeatures import *
+from NSFeatures import *
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 
 ALT_TAGS = ["INDI","FAM"]
 
-def calc_age(string):
-    today = date.today()
-    today = today.strftime("%d/%m/%Y")
-    d = today.split("/")
+def date_converter(string):
     string = string.split()
     if string[1] == "JAN":
         string[1] = 1
@@ -39,21 +39,32 @@ def calc_age(string):
         string[1] = 11
     if string[1] == "DEC":
         string[1] = 12
+    return string
+
+def calc_age(string):
+    today = date.today()
+    today = today.strftime("%d/%m/%Y")
+    d = today.split("/")
+    string = date_converter(string)
     age = 0
     age += int(d[2]) - int(string[2])
-    if int(d[1]) > string[1]:
+    if int(d[1]) < string[1]:
         age = age - 1
     if int(d[1]) == string[1]:
-        if int(d[0]) > int(string[0]):
+        if int(d[0]) < int(string[0]):
             age = age -1 
     return age
+    
 
 def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
-    showing various information, including if the tag is valid.'''
+    showing various information, including if the tag is valid.
+    Returns (indivs, fams), indivs being a list of the individuals in the GEDCOM and fams 
+    being a list of the families in the file, each in the types laid out in classes.py.
+    '''
     indivi_objs = []
     fam_objs = []
-
+    
 
     def printgedline(lvl, tag, arg):
         '''Helper: Print in the doc-specified desired format of:
@@ -79,7 +90,8 @@ def readgedcom(gedfile, printflag):
             if list_line[2] == "INDI":
                 
                 i = Individual()
-                i.id = list_line[1]
+                iIDNum = int(list_line[1][2:-1])
+                i.id = iIDNum
                 # loop through until we hit next INDI/FAM
                 j = c + 1
                 while j < len(gedfile):
@@ -102,9 +114,9 @@ def readgedcom(gedfile, printflag):
                         stuff = line2.split(" ", 2)
                         i.d_date = stuff[2]
                     if next_list_line[1] == "FAMC":
-                        i.child_id = next_list_line[2]
+                        i.child_id = next_list_line[2][1:-1]
                     if next_list_line[1] == "FAMS":
-                        i.spouse_id = next_list_line[2] ## this only leads us to the family id. need to pull the spouse name from there
+                        i.spouse_id = next_list_line[2][1:-1] ## this only leads us to the family id. need to pull the spouse name from there
                     if (len(next_list_line) >= 3) and (next_list_line[2] == "INDI" or next_list_line[2] == "FAM"):
                         break
                     j+=1
@@ -112,7 +124,8 @@ def readgedcom(gedfile, printflag):
                 indivi_objs.append(i)
             if list_line[2] == "FAM":
                 f = Family()
-                f.id = list_line[1]
+                fIDNum = int(list_line[1][2:-1])
+                f.id = fIDNum
                 # loop through until we hit next INDI/FAM
                 k = c + 1
                 list_chil = []
@@ -121,11 +134,11 @@ def readgedcom(gedfile, printflag):
                     next_list_line = nextline.split(" ", 2)
                     next_list_line[-1] = next_list_line[-1].rstrip()
                     if next_list_line[1] == "HUSB":
-                        f.husband = next_list_line[2]    
+                        f.husband = int(next_list_line[2][2:-1])
                     if next_list_line[1] == "WIFE":
-                        f.wife = next_list_line[2]     
+                        f.wife = int(next_list_line[2][2:-1])
                     if next_list_line[1] == "CHIL":
-                        list_chil.append(next_list_line[2])
+                        list_chil.append(int(next_list_line[2][2:-1]))
                         f.children = list_chil
                     if next_list_line[1] == "MARR": ## check next line to get marr day
                         line2 = gedfile[k+1]
@@ -153,7 +166,6 @@ def readgedcom(gedfile, printflag):
         c+=1
     # After while loop: Populate families with individuals
 
-    
     for i in range(len(fam_objs)):
         fam = fam_objs[i]
         #Find husband
@@ -167,60 +179,63 @@ def readgedcom(gedfile, printflag):
 
 
     return indivi_objs, fam_objs
-    
-        
-
-# def printSortedIndividuals(individuals):
-#     individuals.sort(key=lambda x: x.id)
-#     for individual in individuals:
-#         print("Individual ID: " + str(individual.id))
-#         print("Individual Name: " + individual.name)
-#         print("")
-
-# def printSortedFamilies(families):
-#     families.sort(key=lambda x: x.id)
-#     for family in families:
-#         print("Family ID: " + str(family.id))
-#         print("Husband Name: " + family.husband.name)
-#         print("Wife Name: " + family.wife.name)
-#         print("")
+           
 
 def tableIndi(individuals):
+    '''Create a PrettyTable of the individuals and print it.'''
+    individuals.sort(key=lambda x: x.id)
     table = PrettyTable()
-    table.field_names = ["ID", "Name", "Gender", "Brithday", "Age", "Alive", 
-                          "Death", "Child", "Spouse"]
+    table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for i in individuals:
         table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
     print(table)
 
 def tableFamily(families):
+    '''Create a PrettyTable of the families and print it.'''
+    families.sort(key=lambda x: x.id)
     table = PrettyTable()
-    table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", 
-                          "Wife Name", "Children"]
+    table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
     for f in families:
-        table.add_row([f.id, f.mar_date, f.div_date, f.husband.id, f.husband.name, 
-                    f.wife.id, f.wife.name, f.children])
+        table.add_row([f.id, f.mar_date, f.div_date, f.husband.id, f.husband.name, f.wife.id, f.wife.name, f.children])
     print(table)
 
-if __name__ == "__main__":
-
+def main():
+    '''Run and deliver all the features of the gedparse program.'''
     filename = input("Specify GEDCOM file: ")
     printfile = input("Print lines of file? (Y/N):")
     printflag = True if (printfile == "Y" or printfile == "y") else False
-
 
     content = []
     with open(filename) as f: 
         content = f.readlines()
     content = [x.strip() for x in content]
     indivi_objs, fam_objs = readgedcom(content, printflag)
-    # #Testing for sorted individuals
-    # individuals = []
-    # individual1 = Individual(1, "Ed", "M", "5/29/00", 20, "Y", "NA", "NA", "NA")
-    # individual2 = Individual(2, "Mark", "M", "1/24/00", 21, "Y", "NA", "NA", "NA")
-    # individuals.append(individual2)
-    # individuals.append(individual1)
-    # printSortedIndividuals(individuals)
     
     tableIndi(indivi_objs)
     tableFamily(fam_objs)
+
+    #Jerry
+    us1_ind = userstory1_indivi(indivi_objs)
+    us1_fam = userstory1_fam(fam_objs)
+    us42_ind = userstory42_indivi(indivi_objs)
+    us42_fam = userstory42_fam(fam_objs)
+    
+    #Mark
+    us10 = userstory10(fam_objs, indivi_objs)
+    us11 = userstory11(fam_objs)
+    
+    #Nick
+    us29_print(indivi_objs)
+    #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
+    #us36_print(indivi_objs + [recent_death])
+    us36_print(indivi_objs)
+
+    #Edward
+    us21 = userstory21(fam_objs)
+    us22_ind = userstory22_indivi(indivi_objs)
+    us22_fam = userstory22_fam(fam_objs)
+    
+    
+
+if __name__ == "__main__":
+    main() 
