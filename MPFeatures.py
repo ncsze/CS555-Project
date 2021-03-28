@@ -1,3 +1,5 @@
+from utilities import *
+
 def date_converter(string):
     string = string.split()
     if string[1] == "JAN":
@@ -40,30 +42,11 @@ def userstory10(fam_objs, indivi_objs):
                        age = age - 1
                    if married[1] == birthday[1]:
                         if int(married[0]) < int(birthday[0]):
-                            age = age -1 
+                            age = age - 1 
                    if age < 14:
                        anyerrors = True
                        print("WARNING: " + indiv.name + " was married before 14")
     return anyerrors
-
-
-def date_compare(date1,date2):
-    #Returns older date
-    if(date2[2] < date1[2]):
-        return date2
-    if(date2[2] > date1[2]):
-        return date1
-    
-    if(date2[1] < date1[1]):
-        return date2
-    if(date2[1] > date1[1]):
-        return date1
-    
-    if(date2[0] < date1[0]):
-        return date2
-    if(date2[0] > date1[0]):
-        return date1
-
 
 def userstory11(fam_objs):
     anyerrors = False
@@ -92,3 +75,14 @@ def userstory11(fam_objs):
                             anyerrors = True
                             print("WARNING: Family " + str(fam_objs[fam].id) + " and Family " + str(fam_objs[check].id) + " married at the same time")
     return anyerrors
+
+def userstory12(fam_objs, indivi_objs):
+        for fam in fam_objs:
+            for child in fam_objs.Children:
+                for person in indivi_objs:
+                    fatherAge
+                    motherAge
+                    childAge
+                    if(fam.husband.id == person.id):
+                        fatherAge = 
+                        
