@@ -40,6 +40,35 @@ class JYUserStoryTests(unittest.TestCase):
 
         self.assertEqual(userstory42_indivi(indivi_objs), True)
         self.assertEqual(userstory42_fam(fam_objs), True)
+    
+    def test_User_Story_2(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1980", 31, False, "3 JAN 1990", "NA", "NA")
+        indivi_objs.append(i3)
+        f = Family(1, "3 JAN 1990", "NA", i, i2, [])
+        fam_objs.append(f)
+
+        self.assertEqual(userstory2(fam_objs), True)        
+
+
+
+    def test_User_Story_3(self):
+        indivi_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1980", 31, False, "31 JAN 1980", "NA", "NA")
+        indivi_objs.append(i3)
+
+        self.assertEqual(userstory3(indivi_objs), True)
+
+
 
 
 class EYUserStoryTests(unittest.TestCase):

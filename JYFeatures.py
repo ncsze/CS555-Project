@@ -127,9 +127,9 @@ def date_check(string):
 
     return error
 
-def userstory42_indivi(indiv_objs):
+def userstory42_indivi(indivi_objs):
     any_errors = False
-    for i in indiv_objs:
+    for i in indivi_objs:
         bday = ""
         dday = ""
         if i.b_date != "NA":
@@ -164,3 +164,63 @@ def userstory42_fam(fam_objs):
                 any_errors = True
                 print("WARNING: Invalid divorce date", diday)
     return any_errors
+
+# check if date 1 occurs before date 2 return false if it doesn't
+def compare_dates(date1, date2):
+    valid = True
+    if int(date1[2]) > int(date2[2]):
+        valid = False
+    if int(date1[2]) == int(date2[2]):
+        if int(date1[1]) > int(date2[1]):
+            valid = False
+        if int(date1[1]) == int(date2[1]):
+            if int(date1[0]) > int(date2[0]):
+                valid = False
+
+    return valid
+
+
+def userstory2(fam_objs):
+    any_errors = False
+    for f in fam_objs:
+        bday_husband = ""
+        bday_wife = ""
+        mday = ""
+
+        if f.mar_date != "NA":
+            mday = date_converter(f.mar_date)
+        
+        bday_husband = date_converter(f.husband.b_date)
+        bday_wife = date_converter(f.wife.b_date)
+
+        if mday != "" and bday_husband != "" and bday_wife != "":
+            if compare_dates(bday_husband, mday) == False:
+                any_errors = True
+                print("WARNING: Marriage of " + f.husband.name + " occurs before birth.")
+            
+            if compare_dates(bday_wife, mday) == False:
+                any_errors = True
+                print("WARNING: Marriage of " + f.wife.name + " occurs before birth.")
+
+    return any_errors
+
+def userstory3(indivi_objs):
+    any_errors = False
+    for i in indivi_objs:
+        bday = ""
+        dday = ""
+        if i.b_date != "NA":
+            bday = date_converter(i.b_date)
+
+        if i.d_date != "NA":
+            dday = date_converter(i.d_date)
+        
+        if bday != "" and dday != "":
+            if compare_dates(bday, dday) == False:
+                any_errors = True
+                print("WARNING: Death of individual " + i.name + " occurs before birth.")
+
+    return any_errors
+
+
+

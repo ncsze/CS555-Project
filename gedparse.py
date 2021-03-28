@@ -219,6 +219,9 @@ def main():
     us1_fam = userstory1_fam(fam_objs)
     us42_ind = userstory42_indivi(indivi_objs)
     us42_fam = userstory42_fam(fam_objs)
+
+    us2 = userstory2(fam_objs)
+    us3 = userstory3(indivi_objs)
     
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)
