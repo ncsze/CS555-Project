@@ -1,32 +1,5 @@
 from datetime import date
-## had to copy and paste some functions from gedparse over to avoid circular dependencies 
-def date_converter(string):
-    string = string.split()
-    if string[1] == "JAN":
-        string[1] = 1
-    if string[1] == "FEB":
-        string[1] = 2
-    if string[1] == "MAR":
-        string[1] = 3
-    if string[1] == "APR":
-        string[1] = 4
-    if string[1] == "MAY":
-        string[1] = 5
-    if string[1] == "JUN":
-        string[1] = 6
-    if string[1] == "JUL":
-        string[1] = 7
-    if string[1] == "AUG":
-        string[1] = 8
-    if string[1] == "SEP":
-        string[1] = 9
-    if string[1] == "OCT":
-        string[1] = 10
-    if string[1] == "NOV":
-        string[1] = 11
-    if string[1] == "DEC":
-        string[1] = 12
-    return string
+from utilities import *
 
 
 def userstory1_indivi(indivi_objs):
@@ -104,29 +77,6 @@ def userstory1_fam(fam_objs):
 
     return any_errors
 
-def date_check(string):
-    error = False
-    if int(string[0]) <= 0 or int(string[1]) <= 0 or int(string[2]) <= 0:
-        error = True
-
-    if int(string[1]) == 1 or int(string[1]) == 3 or int(string[1]) == 5 or int(string[1]) == 7 or int(string[1]) == 8 or int(string[1]) == 10 or int(string[1]) == 12:
-        if int(string[0]) > 31:
-            error = True
-
-    if int(string[1]) == 4 or int(string[1]) == 6 or int(string[1]) == 9 or int(string[1]) == 11:
-        if int(string[0]) > 30:
-            error = True
-            
-    if int(string[1]) == 2 and int(string[2]) % 4 == 0:
-        if int(string[0]) > 29:
-            error = True
-            
-    if int(string[1]) == 2 and int(string[2]) % 4 != 0:
-        if int(string[0]) > 28:
-            error = True
-
-    return error
-
 def userstory42_indivi(indivi_objs):
     any_errors = False
     for i in indivi_objs:
@@ -164,20 +114,6 @@ def userstory42_fam(fam_objs):
                 any_errors = True
                 print("WARNING: Invalid divorce date", diday)
     return any_errors
-
-# check if date 1 occurs before date 2 return false if it doesn't
-def compare_dates(date1, date2):
-    valid = True
-    if int(date1[2]) > int(date2[2]):
-        valid = False
-    if int(date1[2]) == int(date2[2]):
-        if int(date1[1]) > int(date2[1]):
-            valid = False
-        if int(date1[1]) == int(date2[1]):
-            if int(date1[0]) > int(date2[0]):
-                valid = False
-
-    return valid
 
 
 def userstory2(fam_objs):

@@ -7,6 +7,7 @@ from EYFeatures import *
 from MPFeatures import *
 from JYFeatures import *
 from NSFeatures import *
+from utilities import *
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
