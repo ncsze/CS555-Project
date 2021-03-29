@@ -48,13 +48,60 @@ def userstory11(fam_objs):
                             print("WARNING: Family " + str(fam_objs[fam].id) + " and Family " + str(fam_objs[check].id) + " married at the same time")
     return anyerrors
 
-# def userstory12(fam_objs, indivi_objs):
-#         for fam in fam_objs:
-#             for child in fam_objs.Children:
-#                 for person in indivi_objs:
-#                     fatherAge
-#                     motherAge
-#                     childAge
-#                     if(fam.husband.id == person.id):
-#                         fatherAge = 
+def userstory12(fam_objs, indivi_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        fatherAge = 0
+        motherAge = 0
+        for child in fam.children:
+            childAge = 0
+            childName = ""
+            for person in indivi_objs:
+                if(fam.husband.id == person.id):
+                    fatherAge = calc_age(person.b_date)
+                if(fam.wife.id == person.id):
+                    motherAge = calc_age(person.b_date)  
+                if(child == person.id):
+                    childAge = calc_age(person.b_date)
+                    childName = person.name
+            if(motherAge-childAge > 59 and fatherAge-childAge > 79):
+                anyerrors = True
+                print("WARNING: " + str(childName) + " mother is " + str(motherAge-childAge) + " years older and father is " + str(fatherAge-childAge) + " years older ")
+            elif(motherAge-childAge > 59):
+                anyerrors = True
+                print("WARNING: " + str(childName) + " mother is " + str(motherAge-childAge) + " years older")
+            elif(fatherAge-childAge > 79):
+                anyerrors = True
+                print("WARNING: " + str(childName) + " father is " + str(fatherAge-childAge) + " years older")
+    return anyerrors
+
+def userstory13(fam_objs, indivi_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        for i in range(0, len(fam.children)):
+            for k in range(i+1, len(fam.children)):
+                child1 = ""
+                child2 = ""
+                for person in indivi_objs:
+                    if(fam.children[i] == person.id):
+                        child1 = person
+                    if(fam.children[k] == person.id):
+                        child2 = person
+                start = datetime.date(int(date_converter(child1.b_date)[2]), date_converter(child1.b_date)[1],int(date_converter(child1.b_date)[0]))
+                end = datetime.date(int(date_converter(child2.b_date)[2]), date_converter(child2.b_date)[1],int(date_converter(child2.b_date)[0]))
+                first = min(start,end)
+                second = max(start,end)
+                difference = (second-first).days
+                
+                months_num = 0
+                while(second > first):
+                    first = first + relativedelta(months=+1)
+                    months_num+=1
+                        
+                if(difference > 1 and months_num < 9):
+                    anyerrors = True
+                    print("WARNING: " + child1.name + " and " + child2.name + " born to close")                   
+    return anyerrors
+                    
+                
                         
