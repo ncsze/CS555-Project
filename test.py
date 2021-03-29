@@ -118,6 +118,53 @@ class EYUserStoryTests(unittest.TestCase):
         self.assertTrue(userstory22_indivi(indivi_objs))
         self.assertTrue(userstory22_fam(fam_objs))
 
+    def test_User_Story_23(self):
+        indivi_objs = []
+
+        i1 = Individual(1, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        indivi_objs.append(i1)
+        i2 = Individual(2, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Johnny Bravo", "M", "2/2/2004", 20, True, "NA", "NA", "F3")
+        indivi_objs.append(i3)
+
+        self.assertFalse(userstory23(indivi_objs))
+
+        i4 = Individual(4, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F4")
+        indivi_objs.append(i4)
+
+        self.assertTrue(userstory23(indivi_objs))
+
+    def test_User_Story_24(self):
+        fam_objs = []
+
+        i1 = Individual(1, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        i2 = Individual(2, "Jennifer Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        f1 = Family(1, "10/10/2010", "NA", i1, i2, [])
+        fam_objs.append(f1)
+
+        i3 = Individual(3, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
+        i4 = Individual(4, "Jennifer Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
+        f2 = Family(2, "10/10/2010", "NA", i3, i4, [])
+        fam_objs.append(f2)
+
+        i5 = Individual(5, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
+        i6 = Individual(6, "Jennifer Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
+        f3 = Family(3, "2/2/2020", "NA", i5, i6, [])
+        fam_objs.append(f3)
+
+        self.assertFalse(userstory24(fam_objs))
+
+        i7 = Individual(7, "Johnny Test", "M", "1/2/2005", 21, True, "NA", "NA", "F4")
+        i8 = Individual(8, "Jennifer Test", "M", "1/2/2006", 22, True, "NA", "NA", "F4")
+        f4 = Family(4, "10/10/2010", "NA", i7, i8, [])
+        fam_objs.append(f4)
+
+        self.assertTrue(userstory24(fam_objs))
+
+
+
+
 class MPUserStoryTests(unittest.TestCase):
     
     def test_User_Story_10(self):
