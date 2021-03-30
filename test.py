@@ -1,6 +1,7 @@
 import unittest
 from classes import *
 from gedparse import *
+from datetime import date, timedelta
 
 # TODO
 class JYUserStoryTests(unittest.TestCase):
@@ -428,13 +429,45 @@ class NSUserStoryTests(unittest.TestCase):
     def test_User_Story_36(self):
         
         individuals = []
-        liveman = i = Individual(1, "Alive Man", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        liveman = Individual(1, "Alive Man", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
         deadman = Individual(1, "Dead Man", "M", "10 JAN 1990", 31, False, "10 JAN 2015", "NA", "NA")
         recentlydeadman = Individual(1, "Recent Deadman", "M", "10 JAN 1990", 31, False, date_to_gedstring(date.today()), "NA", "NA")
         individuals.append(liveman)
         individuals.append(deadman)
         individuals.append(recentlydeadman)
         self.assertEqual(userstory36(individuals), [recentlydeadman])
+
+    def test_User_Story_38(self):
+        individuals = []
+        soon = date.today() + timedelta(days=15)
+        toofar = date.today() + timedelta(days=31)
+        liveman = Individual(1, "Alive Man", "M", date_to_gedstring(date.today().replace(year = 1990)), 31, True, "NA", "NA", "NA")
+        deadman = Individual(1, "Just Diedman", "M", date_to_gedstring(date.today().replace(year = 1990)), 31, False, "20 MAR 2021", "NA", "NA")
+        soonman = Individual(1, "Cake Soonman", "M", date_to_gedstring(soon.replace(year = 1990)), 31, True, "NA", "NA", "NA")
+        notsoonman = Individual(1, "Cake Laterman", "M", date_to_gedstring(toofar.replace(year = 1990)), 31, True, "NA", "NA", "NA")
+        individuals.append(liveman)
+        individuals.append(deadman)
+        individuals.append(soonman)
+        individuals.append(notsoonman)
+        self.assertEqual(userstory38(individuals), [liveman,soonman])
+
+    def test_User_Story_35(self):
+        individuals = []
+
+        today = date.today()
+        tomorrow = today + timedelta(days = 1)
+        yesterday = today - timedelta(days = 1)
+        yesteryear = today - timedelta(days = 1, weeks = 52)
+        whileago = today - timedelta(days = 45)
+
+        tomorrowman = Individual(1, "Un Bornman", "M", date_to_gedstring(tomorrow), 0, True, "NA", "NA", "NA")
+        yesterdayman = Individual(1, "Just Bornman", "M", date_to_gedstring(yesterday), 0, True, "NA", "NA", "NA")
+        yesteryearman = Individual(1, "Born Longagoman", "M", date_to_gedstring(yesteryear), 1, True, "NA", "NA", "NA")
+        whileagoman = Individual(1, "Borna Whileagoman", "M", date_to_gedstring(whileago), 0, True, "NA", "NA", "NA")
+
+        individuals = [tomorrowman, yesterdayman, yesteryearman, whileagoman]
+
+        self.assertEqual(userstory35(individuals), [yesterdayman] )
     
 
 if __name__ == "__main__":
