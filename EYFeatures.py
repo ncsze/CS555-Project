@@ -34,3 +34,27 @@ def userstory22_fam(families):
 
     return anyErrors
 
+def userstory23(individuals):
+    anyErrors = False
+    individualSet = set()
+    for individual in individuals:
+        if (individual.name, individual.b_date) in individualSet:
+            anyErrors = True
+            print("WARNING: Individual " + str(individual.id) + " has the same name and birthday.")
+        else:
+            individualSet.add((individual.name, individual.b_date))
+
+    return anyErrors
+
+def userstory24(families):
+    anyErrors = False
+    familySet = set()
+    for family in families:
+        if (family.husband.name, family.wife.name, family.mar_date) in familySet:
+            anyErrors = True
+            print("WARNING: Family " + str(family.id) + " has the same spouses name and marriage date.")
+        else:
+            familySet.add((family.husband.name, family.wife.name, family.mar_date))
+
+    return anyErrors
+
