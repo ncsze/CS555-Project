@@ -7,6 +7,7 @@ from EYFeatures import *
 from MPFeatures import *
 from JYFeatures import *
 from NSFeatures import *
+from utilities import *
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
@@ -176,6 +177,9 @@ def main():
     us1_fam = userstory1_fam(fam_objs)
     us42_ind = userstory42_indivi(indivi_objs)
     us42_fam = userstory42_fam(fam_objs)
+
+    us2 = userstory2(fam_objs)
+    us3 = userstory3(indivi_objs)
     
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)
@@ -186,11 +190,15 @@ def main():
     #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
     #us36_print(indivi_objs + [recent_death])
     us36_print(indivi_objs)
+    us38_print(indivi_objs) # Upcoming birthdays
+    us35_print(indivi_objs) # Recent births
 
     #Edward
     us21 = userstory21(fam_objs)
     us22_ind = userstory22_indivi(indivi_objs)
     us22_fam = userstory22_fam(fam_objs)
+    us23 = userstory23(indivi_objs)
+    us24 = userstory24(fam_objs)
     
     
 
