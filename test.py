@@ -258,10 +258,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "31 DEC 1999", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "2 JAN 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
@@ -279,10 +279,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 JUN 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "2 NOV 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2001", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
@@ -300,10 +300,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "2 JAN 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "10 SEP 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
