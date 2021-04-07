@@ -7,54 +7,12 @@ from EYFeatures import *
 from MPFeatures import *
 from JYFeatures import *
 from NSFeatures import *
+from utilities import *
 
 
 TAGS = ["NAME","SEX","BIRT","DEAT","FAMC","FAMS","MARR","HUSB","WIFE","CHIL","DIV","DATE","HEAD","TRLR","NOTE"]
 
-ALT_TAGS = ["INDI","FAM"]
-
-def date_converter(string):
-    string = string.split()
-    if string[1] == "JAN":
-        string[1] = 1
-    if string[1] == "FEB":
-        string[1] = 2
-    if string[1] == "MAR":
-        string[1] = 3
-    if string[1] == "APR":
-        string[1] = 4
-    if string[1] == "MAY":
-        string[1] = 5
-    if string[1] == "JUN":
-        string[1] = 6
-    if string[1] == "JUL":
-        string[1] = 7
-    if string[1] == "AUG":
-        string[1] = 8
-    if string[1] == "SEP":
-        string[1] = 9
-    if string[1] == "OCT":
-        string[1] = 10
-    if string[1] == "NOV":
-        string[1] = 11
-    if string[1] == "DEC":
-        string[1] = 12
-    return string
-
-def calc_age(string):
-    today = date.today()
-    today = today.strftime("%d/%m/%Y")
-    d = today.split("/")
-    string = date_converter(string)
-    age = 0
-    age += int(d[2]) - int(string[2])
-    if int(d[1]) < string[1]:
-        age = age - 1
-    if int(d[1]) == string[1]:
-        if int(d[0]) < int(string[0]):
-            age = age -1 
-    return age
-    
+ALT_TAGS = ["INDI","FAM"]    
 
 def readgedcom(gedfile, printflag):
     '''Iterates through a GEDCOM file contents in array gedfile, returning formatted output
@@ -219,6 +177,9 @@ def main():
     us1_fam = userstory1_fam(fam_objs)
     us42_ind = userstory42_indivi(indivi_objs)
     us42_fam = userstory42_fam(fam_objs)
+
+    us2 = userstory2(fam_objs)
+    us3 = userstory3(indivi_objs)
     
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)
@@ -229,11 +190,15 @@ def main():
     #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
     #us36_print(indivi_objs + [recent_death])
     us36_print(indivi_objs)
+    us38_print(indivi_objs) # Upcoming birthdays
+    us35_print(indivi_objs) # Recent births
 
     #Edward
     us21 = userstory21(fam_objs)
     us22_ind = userstory22_indivi(indivi_objs)
     us22_fam = userstory22_fam(fam_objs)
+    us23 = userstory23(indivi_objs)
+    us24 = userstory24(fam_objs)
     
     
 
