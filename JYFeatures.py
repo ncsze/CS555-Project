@@ -158,5 +158,52 @@ def userstory3(indivi_objs):
 
     return any_errors
 
+def userstory4(fam_objs):
+    any_errors = False
+    for f in fam_objs:
+        mday = ""
+        div_day = ""
+
+        if f.mar_date != "NA":
+            mday = date_converter(f.mar_date)
+        
+        if f.div_date != "NA":
+            div_day = date_converter(f.div_date)
+
+        if mday != "" and div_day != "":
+            if compare_dates(mday, div_day) == False:
+                any_errors = True
+                print("WARNING: Divorce of family " + str(f.id) + " occurs before marriage.")
+
+    return any_errors
+
+def userstory5(fam_objs):
+    any_errors = False 
+    for f in fam_objs:
+        mday = ""
+        dday_hus = ""
+        dday_wife = ""
+
+        if f.mar_date != "NA":
+            mday = date_converter(f.mar_date)
+
+        if f.husband.d_date != "NA":
+            dday_hus = date_converter(f.husband.d_date)
+
+        if f.wife.d_date != "NA":
+            dday_wife = date_converter(f.wife.d_date)
+
+        if mday != "" and dday_hus != "":
+            if compare_dates(mday, dday_hus) == False:
+                any_errors = True 
+                print("WARNING: Death of individual " + f.husband.name + " occurs before marriage.")
+
+        if mday != "" and dday_wife != "":
+            if compare_dates(mday, dday_wife) == False:
+                any_errors = True 
+                print("WARNING: Death of individual " + f.wife.name + " occurs before marriage.")
+
+    return any_errors
+
 
 

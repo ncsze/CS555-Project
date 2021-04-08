@@ -180,6 +180,9 @@ def main():
 
     us2 = userstory2(fam_objs)
     us3 = userstory3(indivi_objs)
+
+    us4 = userstory4(fam_objs)
+    us5 = userstory5(fam_objs)
     
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)
