@@ -187,6 +187,10 @@ def main():
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)
     us11 = userstory11(fam_objs)
+    us12 = userstory12(fam_objs, indivi_objs)
+    us13 = userstory13(fam_objs, indivi_objs)
+    us14 = userstory14(fam_objs, indivi_objs)
+    us15 = userstory15(fam_objs)
     
     #Nick
     us29_print(indivi_objs)

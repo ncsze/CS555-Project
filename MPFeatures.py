@@ -102,6 +102,41 @@ def userstory13(fam_objs, indivi_objs):
                     anyerrors = True
                     print("WARNING: " + child1.name + " and " + child2.name + " born to close")                   
     return anyerrors
+
+def userstory14(fam_objs, indivi_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        for i in range(0, len(fam.children)):
+            amount = 1
+            for k in range(i+1, len(fam.children)):
+                child1 = ""
+                child2 = ""
+                for person in indivi_objs:
+                    if(fam.children[i] == person.id):
+                        child1 = person
+                    if(fam.children[k] == person.id):
+                        child2 = person
+                start = datetime.date(int(date_converter(child1.b_date)[2]), date_converter(child1.b_date)[1],int(date_converter(child1.b_date)[0]))
+                end = datetime.date(int(date_converter(child2.b_date)[2]), date_converter(child2.b_date)[1],int(date_converter(child2.b_date)[0]))
+                first = min(start,end)
+                second = max(start,end)
+                difference = (second-first).days
+                
+                if(difference < 2):
+                    amount+=1
+            if(amount > 5):
+                anyerrors = True
+                print("WARNING: " + str(amount) + " children born at the same time in family with ID " + str(fam.id))
+    return anyerrors
+
+def userstory15(fam_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        if(len(fam.children) >= 15):
+            anyerrors = True
+            print("WARNING: " + str(len(fam.children)) + " siblings in family with ID " + str(fam.id))
+    return anyerrors
+    
                     
                 
                         

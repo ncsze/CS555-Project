@@ -363,10 +363,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "31 DEC 1999", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "2 JAN 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
@@ -384,10 +384,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 JUN 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "2 NOV 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "4 FEB 2001", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
@@ -405,10 +405,10 @@ class MPUserStoryTests(unittest.TestCase):
         i2 = Individual(2, "Jenny Smith", "F", "3 FEB 1941", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
         
-        i3 = Individual(3, "Judy Smith", "F", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Judy Smith", "F", "2 JAN 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "Brandon Smith", "M", "2 FEB 2000", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Brandon Smith", "M", "10 SEP 2000", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [3, 4])
@@ -417,6 +417,69 @@ class MPUserStoryTests(unittest.TestCase):
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
         self.assertEqual(userstory13(fam_objs, indivi_objs), False)
+    
+    def test_User_Story_14(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        i3 = Individual(3, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        i4 = Individual(4, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i4)
+        
+        i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i5)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory14(fam_objs, indivi_objs), False)
+        
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        i3 = Individual(3, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        i4 = Individual(4, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i4)
+        
+        i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i5)
+        
+        i6 = Individual(6, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i6)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory14(fam_objs, indivi_objs), True)
+    
+    def test_User_Story_15(self):
+        fam_objs = []
+        
+        f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory15(fam_objs), False)
+        
+        fam_objs = []
+        
+        f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory15(fam_objs), True)
         
 def date_to_gedstring(date_object):
     '''Helper method for testing, lets you convert datetime objects like date.today() into GEDCOM-format strings'''
