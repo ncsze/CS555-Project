@@ -69,6 +69,34 @@ class JYUserStoryTests(unittest.TestCase):
 
         self.assertEqual(userstory3(indivi_objs), True)
 
+    def test_User_Story_4(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1980", 31, False, "3 JAN 1990", "NA", "NA")
+        indivi_objs.append(i3)
+        f = Family(1, "3 JAN 1990", "1 JAN 1990", i, i2, [])
+        fam_objs.append(f)
+
+        self.assertEqual(userstory4(fam_objs), True)
+
+    def test_User_Story_5(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1980", 31, False, "3 JAN 1981", "NA", "NA")
+        indivi_objs.append(i3)
+        f = Family(1, "3 JAN 1990", "1 JAN 2000", i, i3, [])
+        fam_objs.append(f)
+
+        self.assertEqual(userstory5(fam_objs), True)
+
 
 
 
@@ -389,6 +417,69 @@ class MPUserStoryTests(unittest.TestCase):
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
         self.assertEqual(userstory13(fam_objs, indivi_objs), False)
+    
+    def test_User_Story_14(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        i3 = Individual(3, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        i4 = Individual(4, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i4)
+        
+        i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i5)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory14(fam_objs, indivi_objs), False)
+        
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        i3 = Individual(3, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        i4 = Individual(4, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i4)
+        
+        i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i5)
+        
+        i6 = Individual(6, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i6)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory14(fam_objs, indivi_objs), True)
+    
+    def test_User_Story_15(self):
+        fam_objs = []
+        
+        f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory15(fam_objs), False)
+        
+        fam_objs = []
+        
+        f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+        fam_objs.append(f1)
+        
+        self.assertEqual(userstory15(fam_objs), True)
         
 def date_to_gedstring(date_object):
     '''Helper method for testing, lets you convert datetime objects like date.today() into GEDCOM-format strings'''
