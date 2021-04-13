@@ -624,6 +624,57 @@ class NSUserStoryTests(unittest.TestCase):
         individuals = [tomorrowman, yesterdayman, yesteryearman, whileagoman]
 
         self.assertEqual(userstory35(individuals), [yesterdayman] )
+
+    def test_User_Story_33(self):
+        indivs = []
+        fams = []
+        # Living Family with young child
+        f1 = Family(1, "NA", "NA", None, None, [3])
+        n1 = Individual (1, "Dad Liveman", "M", "NA", 40, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Mom Liveman", "F", "NA", 37, True, "NA", "NA", "F1")
+        n3 = Individual (3, "Son Liveman", "M", "NA", 7, True, "NA", "F1", "NA")
+        f1.husband = n1
+        f1.wife = n2
+        indivs += [n1,n2,n3]
+        fams += [f1]
+
+        # Orphan Family with adult and young child
+        f2 = Family(2, "NA", "NA", None, None, [6,7])
+        o1 = Individual (4, "Dad Deadman", "M", "NA", 40, False, "NA", "NA", "F2")
+        o2 = Individual (5, "Mom Deadman", "F", "NA", 37, False, "NA", "NA", "F2")
+        o3 = Individual (6, "Sonny Deadman", "M", "NA", 7, True, "NA", "F2", "NA")
+        o4 = Individual (7, "Grown Deadman", "M", "NA", 18, True, "NA", "F2", "NA")
+        f2.husband = o1
+        f2.wife = o2
+        indivs += [o1, o2, o3, o4]
+        fams += [f2]
+
+        self.assertEqual(userstory33(indivs, fams), [o3])
+
+    def test_User_Story_37(self):
+
+        indivs = []
+        fams = []
+        # Living Family with young child
+        f1 = Family(1, "NA", "NA", None, None, [3])
+        n1 = Individual (1, "Dad Liveman", "M", "20 MAR 1981", 40, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Mom Liveman", "F", "10 MAR 1984", 37, True, "NA", "NA", "F1")
+        n3 = Individual (3, "Son Liveman", "M", "1 MAR 2014", 7, True, "NA", "F1", "NA")
+        f1.husband = n1
+        f1.wife = n2
+        indivs += [n1,n2,n3]
+        fams += [f1]
+
+        f2 = Family(2, "NA", "NA", None, None, [6])
+        o1 = Individual (4, "Recent Deadman", "M", "10 JAN 1990", 31, False, date_to_gedstring(date.today()), "NA", "F2")
+        o2 = Individual (5, "Wifey Deadman", "F", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        o3 = Individual (6, "Sonny Deadman", "M", "NA", 7, True, "NA", "F2", "NA")
+        f2.husband = o1
+        f2.wife = o2
+        indivs += [o1, o2, o3]
+        fams += [f2]
+        
+        self.assertEqual(userstory37(indivs, fams), [o2,o3])
     
 
 if __name__ == "__main__":

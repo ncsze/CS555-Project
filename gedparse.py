@@ -193,12 +193,12 @@ def main():
     us15 = userstory15(fam_objs)
     
     #Nick
-    us29_print(indivi_objs)
-    #recent_death = Individual(i_id = 0, name = "Recent Death Testval", gender = "M", b_date = "NA", age = 0, alive = False, d_date = "15 MAR 2021", child = "NA", spouse = "NA")
-    #us36_print(indivi_objs + [recent_death])
-    us36_print(indivi_objs)
+    us29_print(indivi_objs) # All deceased
+    us36_print(indivi_objs) # Recently deceased
     us38_print(indivi_objs) # Upcoming birthdays
     us35_print(indivi_objs) # Recent births
+    us33_print(indivi_objs, fam_objs) # Orphans
+    us37_print(indivi_objs, fam_objs) # Recent survivors
 
     #Edward
     us21 = userstory21(fam_objs)
