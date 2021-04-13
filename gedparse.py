@@ -206,6 +206,8 @@ def main():
     us22_fam = userstory22_fam(fam_objs)
     us23 = userstory23(indivi_objs)
     us24 = userstory24(fam_objs)
+    us25 = userstory25(indivi_objs, fam_objs)
+    us30 = userstory30(fam_objs)
     
     
 
