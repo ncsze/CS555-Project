@@ -168,28 +168,93 @@ class EYUserStoryTests(unittest.TestCase):
         fam_objs = []
 
         i1 = Individual(1, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
-        i2 = Individual(2, "Jennifer Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        i2 = Individual(2, "Jennifer Test", "F", "1/2/2003", 20, True, "NA", "NA", "F1")
         f1 = Family(1, "10/10/2010", "NA", i1, i2, [])
         fam_objs.append(f1)
 
         i3 = Individual(3, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
-        i4 = Individual(4, "Jennifer Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
+        i4 = Individual(4, "Jennifer Bravo", "F", "1/2/2003", 20, True, "NA", "NA", "F2")
         f2 = Family(2, "10/10/2010", "NA", i3, i4, [])
         fam_objs.append(f2)
 
         i5 = Individual(5, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
-        i6 = Individual(6, "Jennifer Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
+        i6 = Individual(6, "Jennifer Bravo", "F", "1/2/2003", 20, True, "NA", "NA", "F3")
         f3 = Family(3, "2/2/2020", "NA", i5, i6, [])
         fam_objs.append(f3)
 
         self.assertFalse(userstory24(fam_objs))
 
         i7 = Individual(7, "Johnny Test", "M", "1/2/2005", 21, True, "NA", "NA", "F4")
-        i8 = Individual(8, "Jennifer Test", "M", "1/2/2006", 22, True, "NA", "NA", "F4")
+        i8 = Individual(8, "Jennifer Test", "F", "1/2/2006", 22, True, "NA", "NA", "F4")
         f4 = Family(4, "10/10/2010", "NA", i7, i8, [])
         fam_objs.append(f4)
 
         self.assertTrue(userstory24(fam_objs))
+
+    def test_User_Story_25(self):
+        indivi_objs = []
+        fam_objs = []
+
+        i1 = Individual(1, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        i2 = Individual(2, "Jennifer Test", "F", "1/2/2003", 20, True, "NA", "NA", "F1")
+        i3 = Individual(3, "Child1", "M", "2/3/2004", 2, True, "NA", "NA", "F1")
+        i4 = Individual(4, "Child2", "F", "2/3/2004", 2, True, "NA", "NA", "F1")
+        f1 = Family(1, "10/10/2010", "NA", i1, i2, [3,4])
+        fam_objs.append(f1)
+
+        i5 = Individual(5, "Johnny Bravo", "M", "1/2/2003", 20, True, "NA", "NA", "F2")
+        i6 = Individual(6, "Jennifer Bravo", "F", "1/2/2003", 20, True, "NA", "NA", "F2")
+        i7 = Individual(7, "Child1", "M", "2/3/2004", 2, True, "NA", "NA", "F2")
+        i8 = Individual(8, "Child2", "F", "5/6/2011", 10, True, "NA", "NA", "F2")
+        f2 = Family(2, "10/10/2010", "NA", i5, i6, [7,8])
+        fam_objs.append(f2)
+
+        i9 = Individual(9, "John B", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
+        i10 = Individual(10, "Jen B", "F", "1/2/2003", 20, True, "NA", "NA", "F3")
+        i11 = Individual(11, "Child1", "M", "2/3/2004", 2, True, "NA", "NA", "F3")
+        i12 = Individual(12, "Child1", "F", "5/6/2011", 10, True, "NA", "NA", "F3")
+        f3 = Family(3, "10/10/2010", "NA", i9, i10, [11,12])
+        fam_objs.append(f3)
+        indivi_objs.extend([i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12])
+
+        self.assertFalse(userstory25(indivi_objs, fam_objs))
+
+        i13 = Individual(13, "Johnny B", "M", "1/2/2003", 20, True, "NA", "NA", "F4")
+        i14 = Individual(14, "Jenny B", "F", "1/2/2003", 20, True, "NA", "NA", "F4")
+        i15 = Individual(15, "Child1", "M", "2/3/2004", 2, True, "NA", "NA", "F4")
+        i16 = Individual(16, "Child1", "F", "2/3/2004", 2, True, "NA", "NA", "F4")
+        f4 = Family(4, "10/10/2010", "NA", i13, i14, [15,16])
+        fam_objs.append(f4)
+        indivi_objs.extend([i13,i14,i15,i16])
+
+        self.assertTrue(userstory25(indivi_objs, fam_objs))
+
+    def test_User_Story_30(self):
+        fam_objs = []
+
+        i1 = Individual(1, "Johnny Test", "M", "1/2/2003", 20, True, "NA", "NA", "F1")
+        i2 = Individual(2, "Jennifer Test", "F", "1/2/2003", 20, True, "NA", "NA", "F1")
+        f1 = Family(1, "10/10/2010", "NA", i1, i2, [])
+        fam_objs.append(f1)
+
+        i3 = Individual(3, "Johnny Bravo", "M", "1/2/2003", 20, False, "NA", "NA", "F2")
+        i4 = Individual(4, "Jennifer Bravo", "F", "1/2/2003", 20, True, "NA", "NA", "F2")
+        f2 = Family(2, "10/10/2010", "NA", i3, i4, [])
+        fam_objs.append(f2)
+
+        i5 = Individual(5, "John B", "M", "1/2/2003", 20, True, "NA", "NA", "F3")
+        i6 = Individual(6, "Jen B", "F", "1/2/2003", 20, True, "NA", "NA", "F3")
+        f3 = Family(3, "10/10/2010", "10/10/2020", i5, i6, [])
+        fam_objs.append(f3)
+
+        i7 = Individual(7, "John B", "M", "1/2/2003", 20, False, "NA", "NA", "F4")
+        i8 = Individual(8, "Jen B", "F", "1/2/2003", 20, False, "NA", "NA", "F4")
+        f4 = Family(4, "10/10/2010", "NA", i7, i8, [])
+        fam_objs.append(f4)
+
+        self.assertEqual(userstory30(fam_objs), [i1,i2,i4])
+
+        
 
 
 
@@ -562,6 +627,57 @@ class NSUserStoryTests(unittest.TestCase):
         individuals = [tomorrowman, yesterdayman, yesteryearman, whileagoman]
 
         self.assertEqual(userstory35(individuals), [yesterdayman] )
+
+    def test_User_Story_33(self):
+        indivs = []
+        fams = []
+        # Living Family with young child
+        f1 = Family(1, "NA", "NA", None, None, [3])
+        n1 = Individual (1, "Dad Liveman", "M", "NA", 40, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Mom Liveman", "F", "NA", 37, True, "NA", "NA", "F1")
+        n3 = Individual (3, "Son Liveman", "M", "NA", 7, True, "NA", "F1", "NA")
+        f1.husband = n1
+        f1.wife = n2
+        indivs += [n1,n2,n3]
+        fams += [f1]
+
+        # Orphan Family with adult and young child
+        f2 = Family(2, "NA", "NA", None, None, [6,7])
+        o1 = Individual (4, "Dad Deadman", "M", "NA", 40, False, "NA", "NA", "F2")
+        o2 = Individual (5, "Mom Deadman", "F", "NA", 37, False, "NA", "NA", "F2")
+        o3 = Individual (6, "Sonny Deadman", "M", "NA", 7, True, "NA", "F2", "NA")
+        o4 = Individual (7, "Grown Deadman", "M", "NA", 18, True, "NA", "F2", "NA")
+        f2.husband = o1
+        f2.wife = o2
+        indivs += [o1, o2, o3, o4]
+        fams += [f2]
+
+        self.assertEqual(userstory33(indivs, fams), [o3])
+
+    def test_User_Story_37(self):
+
+        indivs = []
+        fams = []
+        # Living Family with young child
+        f1 = Family(1, "NA", "NA", None, None, [3])
+        n1 = Individual (1, "Dad Liveman", "M", "20 MAR 1981", 40, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Mom Liveman", "F", "10 MAR 1984", 37, True, "NA", "NA", "F1")
+        n3 = Individual (3, "Son Liveman", "M", "1 MAR 2014", 7, True, "NA", "F1", "NA")
+        f1.husband = n1
+        f1.wife = n2
+        indivs += [n1,n2,n3]
+        fams += [f1]
+
+        f2 = Family(2, "NA", "NA", None, None, [6])
+        o1 = Individual (4, "Recent Deadman", "M", "10 JAN 1990", 31, False, date_to_gedstring(date.today()), "NA", "F2")
+        o2 = Individual (5, "Wifey Deadman", "F", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        o3 = Individual (6, "Sonny Deadman", "M", "NA", 7, True, "NA", "F2", "NA")
+        f2.husband = o1
+        f2.wife = o2
+        indivs += [o1, o2, o3]
+        fams += [f2]
+        
+        self.assertEqual(userstory37(indivs, fams), [o2,o3])
     
 
 if __name__ == "__main__":
