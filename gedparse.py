@@ -190,14 +190,14 @@ def main():
     us7 = less_than_150(indivi_objs)
     
     #Mark
-    us10 = userstory10(fam_objs, indivi_objs)
-    us11 = userstory11(fam_objs)
-    us12 = userstory12(fam_objs, indivi_objs)
-    us13 = userstory13(fam_objs, indivi_objs)
-    us14 = userstory14(fam_objs, indivi_objs)
-    us15 = userstory15(fam_objs)
-    us16 = userstory16(fam_objs, indivi_objs)
-    us17 = userstory17(fam_objs)
+    us10 = marriage_after_14(fam_objs, indivi_objs)
+    us11 = no_bigamy(fam_objs)
+    us12 = parents_age_check(fam_objs, indivi_objs)
+    us13 = siblings_spaced(fam_objs, indivi_objs)
+    us14 = multiple_births(fam_objs, indivi_objs)
+    us15 = siblings_check(fam_objs)
+    us16 = male_last_name(fam_objs, indivi_objs)
+    us17 = marriage_to_descendant(fam_objs)
     
     #Nick
     us29_print(indivi_objs) # All deceased
