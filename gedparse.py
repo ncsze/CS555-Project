@@ -71,6 +71,8 @@ def readgedcom(gedfile, printflag):
                         line2 = gedfile[j+1]
                         stuff = line2.split(" ", 2)
                         i.d_date = stuff[2]
+
+                        i.age = calc_age_for_dead(i.b_date, i.d_date)
                     if next_list_line[1] == "FAMC":
                         i.child_id = next_list_line[2][1:-1]
                     if next_list_line[1] == "FAMS":
