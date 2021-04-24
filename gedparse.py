@@ -191,6 +191,8 @@ def main():
     us13 = userstory13(fam_objs, indivi_objs)
     us14 = userstory14(fam_objs, indivi_objs)
     us15 = userstory15(fam_objs)
+    us16 = userstory16(fam_objs, indivi_objs)
+    us17 = userstory17(fam_objs)
     
     #Nick
     us29_print(indivi_objs) # All deceased

@@ -136,6 +136,36 @@ def userstory15(fam_objs):
             anyerrors = True
             print("WARNING: " + str(len(fam.children)) + " siblings in family with ID " + str(fam.id))
     return anyerrors
+
+def userstory16(fam_objs, indivi_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        for childId in fam.children:
+            for person in indivi_objs:
+                if(childId == person.id):
+                    if(not (lastName(fam.husband.name) == lastName(person.name)) and person.gender == 'M'):
+                            anyerrors = True
+                            print("WARNING: " + fam.husband.name + " and " + person.name + " have different last names")
+    return anyerrors
+
+def userstory17_helper(source, children, fam_objs, anyerrors):
+    for child in children:
+        for fam in fam_objs:
+            if((child == fam.husband.id and source.id == fam.wife.id) or (child == fam.wife.id and source.id == fam.husband.id)):         
+                anyerrors = True
+                print("WARNING: Person of ID " + str(source.id) + " is married to their descendant, person of ID " + str(child))
+            if(child == fam.husband.id or child == fam.wife.id):
+                return userstory17_helper(source, fam.children, fam_objs, anyerrors)
+    return anyerrors
+
+def userstory17(fam_objs):
+    anyerrors = False
+    for fam in fam_objs:
+        wifeError = userstory17_helper(fam.wife, fam.children, fam_objs, False)
+        husbandError = userstory17_helper(fam.husband, fam.children, fam_objs, False)
+        if( wifeError or husbandError ):
+            anyerrors = True      
+    return anyerrors
     
                     
                 

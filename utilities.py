@@ -99,3 +99,8 @@ def compare_dates(date1, date2):
                 valid = False
 
     return valid
+
+# gets the last name 
+def lastName(name):
+    nameArray = name.split(' ')
+    return nameArray[-1]
