@@ -501,7 +501,10 @@ class MPUserStoryTests(unittest.TestCase):
         i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i5)
         
-        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5])
+        i6 = Individual(6, "John Smith", "M", "12 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i6)
+        
+        f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
         fam_objs.append(f1)
         
         self.assertEqual(userstory14(fam_objs, indivi_objs), False)
@@ -517,13 +520,13 @@ class MPUserStoryTests(unittest.TestCase):
         i3 = Individual(3, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        i4 = Individual(4, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        i4 = Individual(4, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i4)
         
-        i5 = Individual(5, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        i5 = Individual(5, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i5)
         
-        i6 = Individual(6, "John Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        i6 = Individual(6, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i6)
         
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
@@ -545,6 +548,62 @@ class MPUserStoryTests(unittest.TestCase):
         fam_objs.append(f1)
         
         self.assertEqual(userstory15(fam_objs), True)
+    
+    def test_User_Story_16(self):
+        fam_objs = []
+        indivi_objs = []
+        
+        husband = Individual(5, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f1 = Family(1, "31 JAN 2000", "NA", husband, "i2", [1, 2, 3])
+        fam_objs.append(f1)
+        
+        i = Individual(1, "James Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        
+        i2 = Individual(2, "John Pitt", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        
+        i3 = Individual(3, "Brandon Harry Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i3)
+        
+        self.assertEqual(userstory16(fam_objs, indivi_objs), True)
+        
+    def test_User_Story_17(self):
+        fam_objs = []
+        
+        husband = Individual(5, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        wife = Individual(4, "Mary Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f1 = Family(1, "31 JAN 2000", "NA", husband, wife, [1, 2, 3])
+        fam_objs.append(f1)
+        
+        husband = Individual(2, "Abe Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        wife = Individual(8, "Mary Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f2 = Family(2, "31 JAN 2000", "NA", husband, wife, [10, 20, 30])
+        fam_objs.append(f2)
+        
+        self.assertEqual(userstory17(fam_objs), False)
+        
+        fam_objs = []
+        
+        husband = Individual(5, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        wife = Individual(4, "Mary Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f1 = Family(1, "31 JAN 2000", "NA", husband, wife, [1, 2, 3])
+        fam_objs.append(f1)
+        
+        husband = Individual(2, "Abe Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        wife = Individual(4, "Mary Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f2 = Family(2, "31 JAN 2000", "NA", husband, wife, [10, 20, 30])
+        fam_objs.append(f2)
+        
+        husband = Individual(5, "John Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        wife = Individual(10, "Jenny Smith", "M", "11 JAN 1921", 31, True, "NA", "NA", "NA")
+        f3 = Family(3, "31 JAN 2000", "NA", husband, wife, [100, 200, 300])
+        fam_objs.append(f3)
+        
+        self.assertEqual(userstory17(fam_objs), True)
+        
+        
+        
         
 def date_to_gedstring(date_object):
     '''Helper method for testing, lets you convert datetime objects like date.today() into GEDCOM-format strings'''
