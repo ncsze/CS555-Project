@@ -71,6 +71,8 @@ def readgedcom(gedfile, printflag):
                         line2 = gedfile[j+1]
                         stuff = line2.split(" ", 2)
                         i.d_date = stuff[2]
+
+                        i.age = calc_age_for_dead(i.b_date, i.d_date)
                     if next_list_line[1] == "FAMC":
                         i.child_id = next_list_line[2][1:-1]
                     if next_list_line[1] == "FAMS":
@@ -173,16 +175,19 @@ def main():
     tableFamily(fam_objs)
 
     #Jerry
-    us1_ind = userstory1_indivi(indivi_objs)
-    us1_fam = userstory1_fam(fam_objs)
-    us42_ind = userstory42_indivi(indivi_objs)
-    us42_fam = userstory42_fam(fam_objs)
+    us1_ind = dates_before_current_date_indivi(indivi_objs)
+    us1_fam = dates_before_current_date_fam(fam_objs)
+    us42_ind = reject_illegitimate_dates_indivi(indivi_objs)
+    us42_fam = reject_illegitimate_dates_fam(fam_objs)
 
-    us2 = userstory2(fam_objs)
-    us3 = userstory3(indivi_objs)
+    us2 = birth_before_marriage(fam_objs)
+    us3 = birth_before_death(indivi_objs)
 
-    us4 = userstory4(fam_objs)
-    us5 = userstory5(fam_objs)
+    us4 = marriage_before_divorce(fam_objs)
+    us5 = marriage_before_death(fam_objs)
+
+    us6 = divorce_before_death(fam_objs)
+    us7 = less_than_150(indivi_objs)
     
     #Mark
     us10 = userstory10(fam_objs, indivi_objs)

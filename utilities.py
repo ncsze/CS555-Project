@@ -44,6 +44,18 @@ def calc_age(string):
             age = age -1 
     return age
 
+def calc_age_for_dead(string1, string2):
+    birth = date_converter(string1)
+    death = date_converter(string2)
+    age = 0
+    age += int(death[2]) - int(birth[2])
+    if int(death[1]) < int(birth[1]):
+        age = age - 1
+    if int(death[1]) == int(birth[1]):
+        if int(death[0]) < int(birth[0]):
+            age = age - 1
+    return age
+
 
 def date_compare(date1,date2):
     #Returns older date
