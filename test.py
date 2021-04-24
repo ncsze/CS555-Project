@@ -19,8 +19,8 @@ class JYUserStoryTests(unittest.TestCase):
         fam_objs.append(f)
 
 
-        self.assertEqual(userstory1_indivi(indivi_objs), False)
-        self.assertEqual(userstory1_fam(fam_objs), True)
+        self.assertEqual(dates_before_current_date_indivi(indivi_objs), False)
+        self.assertEqual(dates_before_current_date_fam(fam_objs), True)
 
     
     def test_User_Story_42(self):
@@ -29,7 +29,7 @@ class JYUserStoryTests(unittest.TestCase):
         i = Individual(1, "Random /Name/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i)
 
-        self.assertEqual(userstory42_indivi(indivi_objs), False)
+        self.assertEqual(reject_illegitimate_dates_indivi(indivi_objs), False)
 
         i2 = Individual(2, "Random /Name/", "F", "31 FEB 1990", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i2)
@@ -39,8 +39,8 @@ class JYUserStoryTests(unittest.TestCase):
         fam_objs.append(f)
 
 
-        self.assertEqual(userstory42_indivi(indivi_objs), True)
-        self.assertEqual(userstory42_fam(fam_objs), True)
+        self.assertEqual(reject_illegitimate_dates_indivi(indivi_objs), True)
+        self.assertEqual(reject_illegitimate_dates_fam(fam_objs), True)
     
     def test_User_Story_2(self):
         indivi_objs = []
@@ -54,7 +54,7 @@ class JYUserStoryTests(unittest.TestCase):
         f = Family(1, "3 JAN 1990", "NA", i, i2, [])
         fam_objs.append(f)
 
-        self.assertEqual(userstory2(fam_objs), True)        
+        self.assertEqual(birth_before_marriage(fam_objs), True)        
 
 
 
@@ -67,7 +67,7 @@ class JYUserStoryTests(unittest.TestCase):
         i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1980", 31, False, "31 JAN 1980", "NA", "NA")
         indivi_objs.append(i3)
 
-        self.assertEqual(userstory3(indivi_objs), True)
+        self.assertEqual(birth_before_death(indivi_objs), True)
 
     def test_User_Story_4(self):
         indivi_objs = []
@@ -81,7 +81,7 @@ class JYUserStoryTests(unittest.TestCase):
         f = Family(1, "3 JAN 1990", "1 JAN 1990", i, i2, [])
         fam_objs.append(f)
 
-        self.assertEqual(userstory4(fam_objs), True)
+        self.assertEqual(marriage_before_divorce(fam_objs), True)
 
     def test_User_Story_5(self):
         indivi_objs = []
@@ -95,9 +95,37 @@ class JYUserStoryTests(unittest.TestCase):
         f = Family(1, "3 JAN 1990", "1 JAN 2000", i, i3, [])
         fam_objs.append(f)
 
-        self.assertEqual(userstory5(fam_objs), True)
+        self.assertEqual(marriage_before_death(fam_objs), True)
 
+    def test_User_Story_6(self):
+        indivi_objs = []
+        fam_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+        i3 = Individual(3, "Random /Name3/", "F", "2 FEB 1960", 31, False, "3 JAN 1981", "NA", "NA")
+        indivi_objs.append(i3)
+        f = Family(1, "3 JAN 1980", "1 JAN 2000", i, i3, [])
+        fam_objs.append(f)
 
+        self.assertEqual(divorce_before_death(fam_objs), True)
+    
+    def test_User_Story_7(self):
+        indivi_objs = []
+        i = Individual(1, "Random /Name1/", "M", "10 JAN 1990", 31, True, "NA", "NA", "NA")
+        indivi_objs.append(i)
+
+        self.assertEqual(less_than_150(indivi_objs), False)
+
+        i2 = Individual(2, "Random /Name2/", "F", "1 FEB 1800", 221, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+
+        i2 = Individual(2, "Random /Name3/", "F", "1 FEB 1850", 171, True, "NA", "NA", "NA")
+        indivi_objs.append(i2)
+
+        self.assertEqual(less_than_150(indivi_objs), True)
+    
 
 
 class EYUserStoryTests(unittest.TestCase):

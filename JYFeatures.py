@@ -1,8 +1,8 @@
 from datetime import date
 from utilities import *
 
-
-def userstory1_indivi(indivi_objs):
+# userstory 1
+def dates_before_current_date_indivi(indivi_objs):
     any_errors = False
     today = date.today()
     today = today.strftime("%d/%m/%Y")
@@ -40,7 +40,7 @@ def userstory1_indivi(indivi_objs):
     return any_errors
 
 
-def userstory1_fam(fam_objs):
+def dates_before_current_date_fam(fam_objs):
     any_errors = False
     today = date.today()
     today = today.strftime("%d/%m/%Y")
@@ -77,7 +77,8 @@ def userstory1_fam(fam_objs):
 
     return any_errors
 
-def userstory42_indivi(indivi_objs):
+# userstory 42
+def reject_illegitimate_dates_indivi(indivi_objs):
     any_errors = False
     for i in indivi_objs:
         bday = ""
@@ -96,7 +97,7 @@ def userstory42_indivi(indivi_objs):
     
     return any_errors
 
-def userstory42_fam(fam_objs):
+def reject_illegitimate_dates_fam(fam_objs):
     any_errors = False
     for f in fam_objs:
         mday = ""
@@ -115,8 +116,8 @@ def userstory42_fam(fam_objs):
                 print("WARNING: Invalid divorce date", diday)
     return any_errors
 
-
-def userstory2(fam_objs):
+# userstory 2
+def birth_before_marriage(fam_objs):
     any_errors = False
     for f in fam_objs:
         bday_husband = ""
@@ -140,7 +141,8 @@ def userstory2(fam_objs):
 
     return any_errors
 
-def userstory3(indivi_objs):
+# userstory 3
+def birth_before_death(indivi_objs):
     any_errors = False
     for i in indivi_objs:
         bday = ""
@@ -158,7 +160,8 @@ def userstory3(indivi_objs):
 
     return any_errors
 
-def userstory4(fam_objs):
+# userstory 4
+def marriage_before_divorce(fam_objs):
     any_errors = False
     for f in fam_objs:
         mday = ""
@@ -177,7 +180,8 @@ def userstory4(fam_objs):
 
     return any_errors
 
-def userstory5(fam_objs):
+# userstory 5
+def marriage_before_death(fam_objs):
     any_errors = False 
     for f in fam_objs:
         mday = ""
@@ -205,5 +209,42 @@ def userstory5(fam_objs):
 
     return any_errors
 
+# userstory 6
+def divorce_before_death(fam_objs):
+    any_errors = False
+    for f in fam_objs:
+        divday = ""
+        dday_hus = ""
+        dday_wife = ""
 
+        if f.div_date != "NA":
+            divday = date_converter(f.div_date)
+
+        if f.husband.d_date != "NA":
+            dday_hus = date_converter(f.husband.d_date)
+
+        if f.wife.d_date != "NA":
+            dday_wife = date_converter(f.wife.d_date)
+
+        if divday != "" and dday_hus != "":
+            if compare_dates(divday, dday_hus) == False:
+                any_errors = True 
+                print("WARNING: Death of individual " + f.husband.name + " occurs before divorce.")
+
+        if divday != "" and dday_wife != "":
+            if compare_dates(divday, dday_wife) == False:
+                any_errors = True 
+                print("WARNING: Death of individual " + f.wife.name + " occurs before divorce.")
+
+    return any_errors
+
+# userstory 7
+def less_than_150(indivi_objs):
+    any_errors = False 
+    for i in indivi_objs:
+        if i.age >= 150:
+            any_errors = True 
+            print("WARNING: Individual " + i.name + " is older than 150.")
+    
+    return any_errors
 
