@@ -1,6 +1,6 @@
 from utilities import *
 
-def userstory10(fam_objs, indivi_objs):
+def marriage_after_14(fam_objs, indivi_objs):
     anyerrors = False
     for fam in fam_objs:
         for indiv in indivi_objs:
@@ -20,7 +20,7 @@ def userstory10(fam_objs, indivi_objs):
                        print("WARNING: " + indiv.name + " was married before 14")
     return anyerrors
 
-def userstory11(fam_objs):
+def no_bigamy(fam_objs):
     anyerrors = False
     for fam in range(len(fam_objs)-1):
         for check in range(fam+1, len(fam_objs)):
@@ -48,7 +48,7 @@ def userstory11(fam_objs):
                             print("WARNING: Family " + str(fam_objs[fam].id) + " and Family " + str(fam_objs[check].id) + " married at the same time")
     return anyerrors
 
-def userstory12(fam_objs, indivi_objs):
+def parents_age_check(fam_objs, indivi_objs):
     anyerrors = False
     for fam in fam_objs:
         fatherAge = 0
@@ -75,7 +75,7 @@ def userstory12(fam_objs, indivi_objs):
                 print("WARNING: " + str(childName) + " father is " + str(fatherAge-childAge) + " years older")
     return anyerrors
 
-def userstory13(fam_objs, indivi_objs):
+def siblings_spaced(fam_objs, indivi_objs):
     anyerrors = False
     for fam in fam_objs:
         for i in range(0, len(fam.children)):
@@ -103,7 +103,7 @@ def userstory13(fam_objs, indivi_objs):
                     print("WARNING: " + child1.name + " and " + child2.name + " born to close")                   
     return anyerrors
 
-def userstory14(fam_objs, indivi_objs):
+def multiple_births(fam_objs, indivi_objs):
     anyerrors = False
     for fam in fam_objs:
         for i in range(0, len(fam.children)):
@@ -129,7 +129,7 @@ def userstory14(fam_objs, indivi_objs):
                 print("WARNING: " + str(amount) + " children born at the same time in family with ID " + str(fam.id))
     return anyerrors
 
-def userstory15(fam_objs):
+def siblings_check(fam_objs):
     anyerrors = False
     for fam in fam_objs:
         if(len(fam.children) >= 15):
@@ -137,7 +137,7 @@ def userstory15(fam_objs):
             print("WARNING: " + str(len(fam.children)) + " siblings in family with ID " + str(fam.id))
     return anyerrors
 
-def userstory16(fam_objs, indivi_objs):
+def male_last_name(fam_objs, indivi_objs):
     anyerrors = False
     for fam in fam_objs:
         for childId in fam.children:
@@ -148,21 +148,21 @@ def userstory16(fam_objs, indivi_objs):
                             print("WARNING: " + fam.husband.name + " and " + person.name + " have different last names")
     return anyerrors
 
-def userstory17_helper(source, children, fam_objs, anyerrors):
+def marriage_to_descendant_helper(source, children, fam_objs, anyerrors):
     for child in children:
         for fam in fam_objs:
             if((child == fam.husband.id and source.id == fam.wife.id) or (child == fam.wife.id and source.id == fam.husband.id)):         
                 anyerrors = True
                 print("WARNING: Person of ID " + str(source.id) + " is married to their descendant, person of ID " + str(child))
             if(child == fam.husband.id or child == fam.wife.id):
-                return userstory17_helper(source, fam.children, fam_objs, anyerrors)
+                return marriage_to_descendant_helper(source, fam.children, fam_objs, anyerrors)
     return anyerrors
 
-def userstory17(fam_objs):
+def marriage_to_descendant(fam_objs):
     anyerrors = False
     for fam in fam_objs:
-        wifeError = userstory17_helper(fam.wife, fam.children, fam_objs, False)
-        husbandError = userstory17_helper(fam.husband, fam.children, fam_objs, False)
+        wifeError = marriage_to_descendant_helper(fam.wife, fam.children, fam_objs, False)
+        husbandError = marriage_to_descendant_helper(fam.husband, fam.children, fam_objs, False)
         if( wifeError or husbandError ):
             anyerrors = True      
     return anyerrors

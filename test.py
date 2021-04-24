@@ -301,7 +301,7 @@ class MPUserStoryTests(unittest.TestCase):
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [])
         fam_objs.append(f1)
         
-        self.assertEqual(userstory10(fam_objs, indivi_objs), True)
+        self.assertEqual(marriage_after_14(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -314,7 +314,7 @@ class MPUserStoryTests(unittest.TestCase):
         f2 = Family(2, "1 MAR 1994", "31 JAN 1993", i3, i4, [])
         fam_objs.append(f2)
         
-        self.assertEqual(userstory10(fam_objs, indivi_objs), False)
+        self.assertEqual(marriage_after_14(fam_objs, indivi_objs), False)
     
     def test_User_Story_11(self):
         indivi_objs = []
@@ -334,7 +334,7 @@ class MPUserStoryTests(unittest.TestCase):
         f2 = Family(2, "31 JAN 2005", "NA", i, i3, [])
         fam_objs.append(f2)
         
-        self.assertEqual(userstory11(fam_objs), True)
+        self.assertEqual(no_bigamy(fam_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -353,7 +353,7 @@ class MPUserStoryTests(unittest.TestCase):
         f2 = Family(4, "31 JAN 2005", "NA", i, i3, [])
         fam_objs.append(f2)
         #tableFamily(fam_objs)
-        self.assertEqual(userstory11(fam_objs), True)
+        self.assertEqual(no_bigamy(fam_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -372,7 +372,7 @@ class MPUserStoryTests(unittest.TestCase):
         f2 = Family(6, "30 JAN 2005", "NA", i, i3, [])
         fam_objs.append(f2)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory11(fam_objs), False)
+        self.assertEqual(no_bigamy(fam_objs), False)
         
     def test_User_Story_12(self):
         indivi_objs = []
@@ -391,7 +391,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory12(fam_objs, indivi_objs), True)
+        self.assertEqual(parents_age_check(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -409,7 +409,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory12(fam_objs, indivi_objs), True)
+        self.assertEqual(parents_age_check(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -427,7 +427,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory12(fam_objs, indivi_objs), True)
+        self.assertEqual(parents_age_check(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -445,7 +445,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory12(fam_objs, indivi_objs), False)
+        self.assertEqual(parents_age_check(fam_objs, indivi_objs), False)
         
     def test_User_Story_13(self):
         indivi_objs = []
@@ -467,7 +467,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory13(fam_objs, indivi_objs), True)
+        self.assertEqual(siblings_spaced(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -488,7 +488,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory13(fam_objs, indivi_objs), True)
+        self.assertEqual(siblings_spaced(fam_objs, indivi_objs), True)
         
         indivi_objs = []
         fam_objs = []
@@ -509,7 +509,7 @@ class MPUserStoryTests(unittest.TestCase):
         
         # tableIndi(indivi_objs)
         # tableFamily(fam_objs)
-        self.assertEqual(userstory13(fam_objs, indivi_objs), False)
+        self.assertEqual(siblings_spaced(fam_objs, indivi_objs), False)
     
     def test_User_Story_14(self):
         indivi_objs = []
@@ -535,7 +535,7 @@ class MPUserStoryTests(unittest.TestCase):
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
         fam_objs.append(f1)
         
-        self.assertEqual(userstory14(fam_objs, indivi_objs), False)
+        self.assertEqual(multiple_births(fam_objs, indivi_objs), False)
         
         indivi_objs = []
         fam_objs = []
@@ -560,7 +560,7 @@ class MPUserStoryTests(unittest.TestCase):
         f1 = Family(1, "31 JAN 2000", "NA", i, i2, [1, 2, 3, 4, 5, 6])
         fam_objs.append(f1)
         
-        self.assertEqual(userstory14(fam_objs, indivi_objs), True)
+        self.assertEqual(multiple_births(fam_objs, indivi_objs), True)
     
     def test_User_Story_15(self):
         fam_objs = []
@@ -568,14 +568,14 @@ class MPUserStoryTests(unittest.TestCase):
         f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
         fam_objs.append(f1)
         
-        self.assertEqual(userstory15(fam_objs), False)
+        self.assertEqual(siblings_check(fam_objs), False)
         
         fam_objs = []
         
         f1 = Family(1, "31 JAN 2000", "NA", "i", "i2", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
         fam_objs.append(f1)
         
-        self.assertEqual(userstory15(fam_objs), True)
+        self.assertEqual(siblings_check(fam_objs), True)
     
     def test_User_Story_16(self):
         fam_objs = []
@@ -594,7 +594,7 @@ class MPUserStoryTests(unittest.TestCase):
         i3 = Individual(3, "Brandon Harry Smith", "M", "10 JAN 1921", 31, True, "NA", "NA", "NA")
         indivi_objs.append(i3)
         
-        self.assertEqual(userstory16(fam_objs, indivi_objs), True)
+        self.assertEqual(male_last_name(fam_objs, indivi_objs), True)
         
     def test_User_Story_17(self):
         fam_objs = []
@@ -609,7 +609,7 @@ class MPUserStoryTests(unittest.TestCase):
         f2 = Family(2, "31 JAN 2000", "NA", husband, wife, [10, 20, 30])
         fam_objs.append(f2)
         
-        self.assertEqual(userstory17(fam_objs), False)
+        self.assertEqual(marriage_to_descendant(fam_objs), False)
         
         fam_objs = []
         
@@ -628,7 +628,7 @@ class MPUserStoryTests(unittest.TestCase):
         f3 = Family(3, "31 JAN 2000", "NA", husband, wife, [100, 200, 300])
         fam_objs.append(f3)
         
-        self.assertEqual(userstory17(fam_objs), True)
+        self.assertEqual(marriage_to_descendant(fam_objs), True)
         
         
         
