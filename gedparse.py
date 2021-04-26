@@ -200,12 +200,14 @@ def main():
     us17 = marriage_to_descendant(fam_objs)
     
     #Nick
-    us29_print(indivi_objs) # All deceased
-    us36_print(indivi_objs) # Recently deceased
-    us38_print(indivi_objs) # Upcoming birthdays
-    us35_print(indivi_objs) # Recent births
-    us33_print(indivi_objs, fam_objs) # Orphans
-    us37_print(indivi_objs, fam_objs) # Recent survivors
+    print_deceased(indivi_objs) # All deceased
+    print_recently_deceased(indivi_objs) # Recently deceased
+    print_birthdays_soon(indivi_objs) # Upcoming birthdays
+    print_recent_births(indivi_objs) # Recent births
+    print_orphans(indivi_objs, fam_objs) # Orphans
+    print_recent_survivors(indivi_objs, fam_objs) # Recent survivors
+    print_large_age_gaps(fam_objs) # Large age gaps
+    print_upcoming_anniversaries(fam_objs) # Upcoming anniversaries
 
     #Edward
     us21 = correctGender(fam_objs)

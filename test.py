@@ -712,7 +712,7 @@ class NSUserStoryTests(unittest.TestCase):
         deadman = Individual(1, "Dead Man", "M", "10 JAN 1990", 31, False, "10 JAN 2015", "NA", "NA")
         individuals.append(liveman)
         individuals.append(deadman)
-        self.assertEqual(userstory29(individuals), [deadman])
+        self.assertEqual(list_deceased(individuals), [deadman])
     
     def test_User_Story_36(self):
         
@@ -723,7 +723,7 @@ class NSUserStoryTests(unittest.TestCase):
         individuals.append(liveman)
         individuals.append(deadman)
         individuals.append(recentlydeadman)
-        self.assertEqual(userstory36(individuals), [recentlydeadman])
+        self.assertEqual(list_recently_deceased(individuals), [recentlydeadman])
 
     def test_User_Story_38(self):
         individuals = []
@@ -737,7 +737,7 @@ class NSUserStoryTests(unittest.TestCase):
         individuals.append(deadman)
         individuals.append(soonman)
         individuals.append(notsoonman)
-        self.assertEqual(userstory38(individuals), [liveman,soonman])
+        self.assertEqual(list_birthdays_soon(individuals), [liveman,soonman])
 
     def test_User_Story_35(self):
         individuals = []
@@ -755,7 +755,7 @@ class NSUserStoryTests(unittest.TestCase):
 
         individuals = [tomorrowman, yesterdayman, yesteryearman, whileagoman]
 
-        self.assertEqual(userstory35(individuals), [yesterdayman] )
+        self.assertEqual(list_recent_births(individuals), [yesterdayman] )
 
     def test_User_Story_33(self):
         indivs = []
@@ -781,7 +781,7 @@ class NSUserStoryTests(unittest.TestCase):
         indivs += [o1, o2, o3, o4]
         fams += [f2]
 
-        self.assertEqual(userstory33(indivs, fams), [o3])
+        self.assertEqual(list_orphans(indivs, fams), [o3])
 
     def test_User_Story_37(self):
 
@@ -806,8 +806,56 @@ class NSUserStoryTests(unittest.TestCase):
         indivs += [o1, o2, o3]
         fams += [f2]
         
-        self.assertEqual(userstory37(indivs, fams), [o2,o3])
+        self.assertEqual(list_recent_survivors(indivs, fams), [o2,o3])
     
+    def test_User_Story_34(self):
+        fams = []
+        f1 = Family(1, "NA", "NA", None, None, [3])
+        n1 = Individual (1, "John Oldman", "M", "20 MAR 1976", 45, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Jane Young", "F", "10 MAR 2001", 20, True, "NA", "NA", "F1")
+        f1.husband = n1
+        f1.wife = n2
+        fams += [f1]
+
+        f2 = Family(2, "NA", "NA", None, None, [6])
+        o1 = Individual (4, "Of Ageman", "M", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        o2 = Individual (5, "Jane Nogap", "F", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        f2.husband = o1
+        f2.wife = o2
+        fams += [f2]
+
+        self.assertEqual(list_large_age_gaps(fams), [f1])
+
+
+    def test_User_Story_39(self):
+        fams = []
+        today = date.today()
+        tomorrow = date_to_gedstring(today + timedelta(days = 1))
+        yesterday = date_to_gedstring(today - timedelta(days = 1))
+
+        f1 = Family(1, yesterday, "NA", None, None, [])
+        n1 = Individual (1, "John Oldman", "M", "20 MAR 1976", 45, True, "NA", "NA", "F1")
+        n2 = Individual (2, "Jane Young", "F", "10 MAR 2001", 20, True, "NA", "NA", "F1")
+        f1.husband = n1
+        f1.wife = n2
+        fams += [f1]
+
+        f2 = Family(2, tomorrow, "NA", None, None, [])
+        o1 = Individual (3, "Of Ageman", "M", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        o2 = Individual (4, "Jane Nogap", "F", "10 JAN 1990", 31, True, "NA", "NA", "F2")
+        f2.husband = o1
+        f2.wife = o2
+        fams += [f2]
+
+        f3 = Family(3, tomorrow, "NA", None, None, [])
+        e1 = Individual (5, "Dead Fella", "M", "10 JAN 1990", 31, False, yesterday, "NA", "F3")
+        e2 = Individual (6, "Jane Nogap", "F", "10 JAN 1990", 31, True, "NA", "NA", "F3")
+        f3.husband = e1
+        f3.wife = e2
+        fams += [f3]
+
+        self.assertEqual(list_upcoming_anniversaries(fams), [f2])
+
 
 if __name__ == "__main__":
     unittest.main()

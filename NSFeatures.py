@@ -41,8 +41,9 @@ def to_date(death_date):
         return None
     
 
-def userstory29(indivs):
+def list_deceased(indivs):
     '''
+    User Story 29
     List deceased: List all deceased individuals in a GEDCOM file.
     Returns a list of individuals.
     '''
@@ -58,22 +59,23 @@ def userstory29(indivs):
 
     return deceased
 
-def us29_print(indivs):
-    '''Prints the list of all deceased individuals.'''
-    result = userstory29(indivs)
+def print_deceased(indivs):
+    '''Prints the list of all deceased individuals (US29).'''
+    result = list_deceased(indivs)
     print("Deceased Individuals:")
     if result == []:
         print ("None")
     for entry in result:
         print(entry.name, "ID:", entry.id, "Death Date:", entry.d_date)
 
-def userstory36(indivs):
+def list_recently_deceased(indivs):
     '''
+    User Story 36
     List recently deceased: List all people in a GEDCOM file who died in the last 30 days.
     Returns a list of individuals.
     '''
     today = date.today()
-    deceased = userstory29(indivs)
+    deceased = list_deceased(indivs)
     recent_deceased = []
     
     for indiv in deceased:
@@ -83,17 +85,18 @@ def userstory36(indivs):
         
     return recent_deceased
 
-def us36_print(indivs):
-    '''Prints the list of all recently deceased individuals.'''
-    result = userstory36(indivs)
+def print_recently_deceased(indivs):
+    '''Prints the list of all recently deceased individuals (US36).'''
+    result = list_recently_deceased(indivs)
     print("Recently Deceased Individuals:")
     if result == []:
         print ("None")
     for entry in result:
         print(entry.name, "ID:", entry.id, "Death Date:", entry.d_date)
 
-def userstory38(indivs):
+def list_birthdays_soon(indivs):
     '''
+    User Story 38
     List all living people in a GEDCOM file whose birthdays occur in the next 30 days.
     Returns a list of individuals.
     '''
@@ -118,17 +121,18 @@ def userstory38(indivs):
         
     return birthdays_soon
 
-def us38_print(indivs):
-    '''Prints the list of all individuals with upcoming birthdays.'''
-    result = userstory38(indivs)
+def print_birthdays_soon(indivs):
+    '''Prints the list of all individuals with upcoming birthdays (US38).'''
+    result = list_birthdays_soon(indivs)
     print("Individuals with Birthdays Soon:")
     if result == []:
         print ("None")
     for entry in result:
         print(entry.name, "ID:", entry.id, "Birthday:", entry.b_date)
 
-def userstory35(indivs):
+def list_recent_births(indivs):
     '''
+    User Story 35
     List all people in a GEDCOM file who were born in the last 30 days.
     Returns a list of individuals.
     '''
@@ -143,17 +147,18 @@ def userstory35(indivs):
         
     return born_recently
 
-def us35_print(indivs):
-    '''Prints the list of all individuals born recently.'''
-    result = userstory35(indivs)
+def print_recent_births(indivs):
+    '''Prints the list of all individuals born recently (US35).'''
+    result = list_recent_births(indivs)
     print("Recently Born Individuals:")
     if result == []:
         print ("None")
     for entry in result:
         print(entry.name, "ID:", entry.id, "Birthday:", entry.b_date)
 
-def userstory33(indivs, fams):
+def list_orphans(indivs, fams):
     '''
+    User Story 33
     List orphans:
     List all orphaned children (both parents dead and child < 18 years old) in a GEDCOM file.
     Returns a list of Individual objects.
@@ -171,9 +176,9 @@ def userstory33(indivs, fams):
             orphans.append(indiv)
     return orphans
 
-def us33_print(indivs, fams):
-    '''Prints a list of all orphans.'''
-    orphans = userstory33(indivs,fams)
+def print_orphans(indivs, fams):
+    '''Prints a list of all orphans (US33).'''
+    orphans = list_orphans(indivs,fams)
     print("Orphaned Children:")
     if orphans == []:
         # The good ending
@@ -182,14 +187,15 @@ def us33_print(indivs, fams):
         # The bad ending
         print(orphan.name, "ID:",orphan.id,"Age:",orphan.age)
 
-def userstory37(indivs, fams):
+def list_recent_survivors(indivs, fams):
     '''
+    User Story 37
     List recent survivors:
     List all living spouses and descendants of people in a GEDCOM file who died in the last 30 days.
     Returns a list of Individual objects.
     '''
     # We can use the functionality of User Story 36 (recent deaths) to complete this.
-    recentdeaths = userstory36(indivs)
+    recentdeaths = list_recently_deceased(indivs)
 
     # Get only the IDs for lookup.
     for i in range(len(recentdeaths)):
@@ -215,11 +221,67 @@ def userstory37(indivs, fams):
 
     return survivors
 
-def us37_print(indivs, fams):
-    '''Prints a list of all recent survivors.'''
-    survivors = userstory37(indivs,fams)
+def print_recent_survivors(indivs, fams):
+    '''Prints a list of all recent survivors (US37).'''
+    survivors = list_recent_survivors(indivs,fams)
     print("Recent Survivors:")
     if survivors == []:
         print("None")
     for indiv in survivors:
         print(indiv.name, "ID:",indiv.id, "Age:",indiv.age)
+
+
+def list_large_age_gaps(fams):
+    '''
+    User Story 34
+    List large age differences:
+    List all couples who were married when the older spouse was more than twice as old as the younger spouse
+    Returns a list of families.
+    '''
+    gross_weirdos = []
+
+    for fam in fams:
+        if (fam.husband.age >= fam.wife.age * 2) or (fam.wife.age >= fam.husband.age * 2):
+            gross_weirdos.append(fam)
+    
+    return gross_weirdos
+
+def print_large_age_gaps(fams):
+    '''Prints the list of all couples with large age gaps (US34).'''
+    gross_weirdos = list_large_age_gaps(fams)
+    print("Large Age Gaps:")
+    if gross_weirdos == []:
+        print("None")
+    for fam in gross_weirdos:
+        print(fam.husband.name + ", " + fam.wife.name + ", " + "Age Gap: " + str(abs(fam.wife.age - fam.husband.age)) )
+
+def list_upcoming_anniversaries(fams):
+    '''
+    User Story 39
+    List upcoming anniversaries:
+    List all living couples in a GEDCOM file whose marriage anniversaries occur in the next 30 days
+    Returns a list of families.
+    '''
+    today = date.today()
+    anniversaries_soon = []
+    day_threshold = 30
+
+    for fam in fams:
+        if fam.mar_date != "NA":
+            anni_date = to_date(fam.mar_date)
+            if  (anni_date is not None) and (fam.husband.alive and fam.wife.alive) and \
+            (0 <= (anni_date - today).days <= day_threshold ):
+                anniversaries_soon.append(fam)
+        else:
+            continue
+        
+    return anniversaries_soon
+
+def print_upcoming_anniversaries(fams):
+    '''Prints the list of couples with an anniversary soon (US39).'''
+    anniversaries_soon = list_upcoming_anniversaries(fams)
+    print("Upcoming Anniversaries:")
+    if anniversaries_soon == []:
+        print("None")
+    for fam in anniversaries_soon:
+        print(fam.husband.name + ", " + fam.wife.name + ", " + "Anniversary: " + fam.mar_date)
