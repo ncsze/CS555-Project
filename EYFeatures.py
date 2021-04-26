@@ -123,21 +123,31 @@ def livingSingle(individuals, families):
 
     return livingSingleList
 
-def multipleBirths(families):
+def multipleBirths(individuals, families):
+    individualDict = {}
+    for individual in individuals:
+        individualDict[individual.id] = individual
+
     multipleBirthsList = []
     for family in families:
         if len(family.children) <= 1:
             continue
 
-        family.children.sort(key=lambda i: datetime.strptime(i.b_date, "%m/%d/%Y"))
-        for childIndex in range(len(family.children) - 1):
-            child1 = datetime.strptime(family.children[childIndex].b_date, "%m/%d/%Y")
-            child2 = datetime.strptime(family.children[childIndex+1].b_date, "%m/%d/%Y")
+        childrenList = []
+        for child in family.children:
+            if child in individualDict:
+                childrenList.append(individualDict[child])
+        
+        childrenList.sort(key=lambda i: datetime.strptime(i.b_date, "%d %b %Y"))
+
+        for childIndex in range(len(childrenList) - 1):
+            child1 = datetime.strptime(childrenList[childIndex].b_date, "%d %b %Y")
+            child2 = datetime.strptime(childrenList[childIndex+1].b_date, "%d %b %Y")
             if child2 - timedelta(days=2) < child1:
-                if family.children[childIndex] not in multipleBirthsList:                  
-                    multipleBirthsList.append(family.children[childIndex])
-                if family.children[childIndex+1] not in multipleBirthsList:
-                    multipleBirthsList.append(family.children[childIndex+1])
+                if childrenList[childIndex] not in multipleBirthsList:                  
+                    multipleBirthsList.append(childrenList[childIndex])
+                if childrenList[childIndex+1] not in multipleBirthsList:
+                    multipleBirthsList.append(childrenList[childIndex+1])
 
     table = PrettyTable()
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
