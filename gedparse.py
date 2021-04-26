@@ -216,7 +216,7 @@ def main():
     us25 = uniqueFirstName(indivi_objs, fam_objs)
     us30 = livingMarried(fam_objs)
     us31 = livingSingle(indivi_objs, fam_objs)
-    us32 = multipleBirths(fam_objs)
+    us32 = multipleBirths(indivi_objs, fam_objs)
     
     
 

@@ -303,28 +303,31 @@ class EYUserStoryTests(unittest.TestCase):
         self.assertEqual(livingSingle(indivi_objs, fam_objs), [i1])
 
     def test_User_Story_32(self):
+        indivi_objs = []
         fam_objs = []
 
-        i1 = Individual(1, "Child1", "M", "4/4/2000", 21, True, "NA", "NA", "NA")
-        i2 = Individual(2, "Child2", "M", "4/3/2000", 21, True, "NA", "NA", "NA")
-        i3 = Individual(3, "Child3", "M", "4/5/2000", 21, True, "NA", "NA", "NA")
-        i4 = Individual(4, "Child4", "M", "7/7/2000", 20, True, "NA", "NA", "NA")
+        i1 = Individual(1, "Child1", "M", "4 APR 2000", 21, True, "NA", "NA", "NA")
+        i2 = Individual(2, "Child2", "M", "3 APR 2000", 21, True, "NA", "NA", "NA")
+        i3 = Individual(3, "Child3", "M", "5 APR 2000", 21, True, "NA", "NA", "NA")
+        i4 = Individual(4, "Child4", "M", "7 JUL 2000", 20, True, "NA", "NA", "NA")
 
-        f1 = Family(1, "NA", "NA", None, None, [i1,i2,i3,i4])
+        f1 = Family(1, "NA", "NA", None, None, [1,2,3,4])
         fam_objs.append(f1)
 
-        i5 = Individual(5, "Child5", "M", "1/1/2000", 21, True, "NA", "NA", "NA")
+        i5 = Individual(5, "Child5", "M", "1 JAN 2000", 21, True, "NA", "NA", "NA")
 
-        f2 = Family(2, "NA", "NA", None, None, [i5])
+        f2 = Family(2, "NA", "NA", None, None, [5])
         fam_objs.append(f2)
 
-        i6 = Individual(6, "Child6", "M", "3/3/2000", 21, True, "NA", "NA", "NA")
-        i7 = Individual(7, "Child7", "M", "3/2/2000", 21, True, "NA", "NA", "NA")
+        i6 = Individual(6, "Child6", "M", "3 MAR 2000", 21, True, "NA", "NA", "NA")
+        i7 = Individual(7, "Child7", "M", "2 MAR 2000", 21, True, "NA", "NA", "NA")
 
-        f3 = Family(3, "NA", "NA", None, None, [i6,i7])
+        f3 = Family(3, "NA", "NA", None, None, [6,7])
         fam_objs.append(f3)
 
-        self.assertEqual(multipleBirths(fam_objs), [i2,i1,i3,i7,i6])
+        indivi_objs.extend([i1,i2,i3,i4,i5,i6,i7])
+
+        self.assertEqual(multipleBirths(indivi_objs, fam_objs), [i2,i1,i3,i7,i6])
 
 
         
