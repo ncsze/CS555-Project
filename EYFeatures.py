@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
+from datetime import datetime, timedelta
 
-def userstory21(families):
+def correctGender(families):
     anyErrors = False
     for family in families:
         if family.husband.gender != "M":
@@ -12,7 +13,7 @@ def userstory21(families):
     
     return anyErrors
 
-def userstory22_indivi(individuals):
+def uniqueID_indivi(individuals):
     anyErrors = False
     idSet = set()
     for individual in individuals:
@@ -24,7 +25,7 @@ def userstory22_indivi(individuals):
 
     return anyErrors
 
-def userstory22_fam(families):
+def uniqueID_fam(families):
     anyErrors = False
     idSet = set()
     for family in families:
@@ -36,7 +37,7 @@ def userstory22_fam(families):
 
     return anyErrors
 
-def userstory23(individuals):
+def uniqueNameAndBDay(individuals):
     anyErrors = False
     individualSet = set()
     for individual in individuals:
@@ -48,7 +49,7 @@ def userstory23(individuals):
 
     return anyErrors
 
-def userstory24(families):
+def uniqueFamilies(families):
     anyErrors = False
     familySet = set()
     for family in families:
@@ -60,7 +61,7 @@ def userstory24(families):
 
     return anyErrors
 
-def userstory25(individuals, families):
+def uniqueFirstName(individuals, families):
     anyErrors = False
 
     childIndividualDict = {}
@@ -84,7 +85,7 @@ def userstory25(individuals, families):
             
     return anyErrors
 
-def userstory30(families):
+def livingMarried(families):
     livingMarriedList = []
     for family in families:
         if family.div_date == "NA":
@@ -100,4 +101,50 @@ def userstory30(families):
     print(table)
 
     return livingMarriedList
+
+def livingSingle(individuals, families):
+    livingSingleList = []
+    for individual in individuals:
+        if individual.alive and individual.age > 30 and individual.spouse_id == "NA":
+            livingSingleList.append(individual)
+
+    for family in families:
+        if family.div_date != "NA":
+            if family.husband in livingSingleList:
+                livingSingleList.remove(family.husband)
+            if family.wife in livingSingleList:
+                livingSingleList.remove(family.wife)
+
+    table = PrettyTable()
+    table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    for i in livingSingleList:
+        table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
+    print(table)
+
+    return livingSingleList
+
+def multipleBirths(families):
+    multipleBirthsList = []
+    for family in families:
+        if len(family.children) <= 1:
+            continue
+
+        family.children.sort(key=lambda i: datetime.strptime(i.b_date, "%m/%d/%Y"))
+        for childIndex in range(len(family.children) - 1):
+            child1 = datetime.strptime(family.children[childIndex].b_date, "%m/%d/%Y")
+            child2 = datetime.strptime(family.children[childIndex+1].b_date, "%m/%d/%Y")
+            if child2 - timedelta(days=2) < child1:
+                if family.children[childIndex] not in multipleBirthsList:                  
+                    multipleBirthsList.append(family.children[childIndex])
+                if family.children[childIndex+1] not in multipleBirthsList:
+                    multipleBirthsList.append(family.children[childIndex+1])
+
+    table = PrettyTable()
+    table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
+    for i in multipleBirthsList:
+        table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
+    print(table)
+    
+    return multipleBirthsList
+
 

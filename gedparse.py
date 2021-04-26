@@ -208,13 +208,15 @@ def main():
     us37_print(indivi_objs, fam_objs) # Recent survivors
 
     #Edward
-    us21 = userstory21(fam_objs)
-    us22_ind = userstory22_indivi(indivi_objs)
-    us22_fam = userstory22_fam(fam_objs)
-    us23 = userstory23(indivi_objs)
-    us24 = userstory24(fam_objs)
-    us25 = userstory25(indivi_objs, fam_objs)
-    us30 = userstory30(fam_objs)
+    us21 = correctGender(fam_objs)
+    us22_ind = uniqueID_indivi(indivi_objs)
+    us22_fam = uniqueID_fam(fam_objs)
+    us23 = uniqueNameAndBDay(indivi_objs)
+    us24 = uniqueFamilies(fam_objs)
+    us25 = uniqueFirstName(indivi_objs, fam_objs)
+    us30 = livingMarried(fam_objs)
+    us31 = livingSingle(indivi_objs, fam_objs)
+    us32 = multipleBirths(fam_objs)
     
     
 
