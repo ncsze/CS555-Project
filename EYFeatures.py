@@ -98,6 +98,7 @@ def livingMarried(families):
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for i in livingMarriedList:
         table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
+    print("Living Married Individuals:")
     print(table)
 
     return livingMarriedList
@@ -119,6 +120,7 @@ def livingSingle(individuals, families):
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for i in livingSingleList:
         table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
+    print("Living Unmarried Individuals:")
     print(table)
 
     return livingSingleList
@@ -153,6 +155,7 @@ def multipleBirths(individuals, families):
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
     for i in multipleBirthsList:
         table.add_row([i.id, i.name, i.gender, i.b_date, i.age, i.alive, i.d_date, i.child_id, i.spouse_id])
+    print("Multiple Births:")
     print(table)
     
     return multipleBirthsList

@@ -143,6 +143,7 @@ def readgedcom(gedfile, printflag):
 
 def tableIndi(individuals):
     '''Create a PrettyTable of the individuals and print it.'''
+    print("Individuals:")
     individuals.sort(key=lambda x: x.id)
     table = PrettyTable()
     table.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
@@ -152,6 +153,7 @@ def tableIndi(individuals):
 
 def tableFamily(families):
     '''Create a PrettyTable of the families and print it.'''
+    print("Families:")
     families.sort(key=lambda x: x.id)
     table = PrettyTable()
     table.field_names = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
